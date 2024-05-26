@@ -35,7 +35,7 @@ Adafruit_BME280 bme;          // I2C
 struct Data {
   char ssid[20] = "";
   char pass[20] = "";
-  char AP_ssid[20] = "";
+  char AP_ssid[20] = "Climatic_Chamber";
   int gmt = 2;
   float temp = 10.0;
   float temp_hys = 0.0;
