@@ -98,12 +98,10 @@ void action() {
       else digitalWrite(RELE1, OFF);
       eemem.updateNow();
     }
-
     if (ui.clickDown("espRestart")) {
       Serial.println("Controller Restart");
       ESP.restart();
     }
     
-
   }  //ui.click()
 }  //action()

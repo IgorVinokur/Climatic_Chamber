@@ -35,7 +35,7 @@ Adafruit_BME280 bme;          // I2C
 struct Data {
   char ssid[20] = "";
   char pass[20] = "";
-  char AP_ssid[20] = "Climatic_Chamber";
+  char AP_ssid[20] = "";
   int gmt = 2;
   float temp = 10.0;
   float temp_hys = 0.0;
@@ -66,6 +66,7 @@ struct Data {
   GPtime stopTime;
   int16_t minTempr = 0;
   int16_t maxTempr = 0;
+  
 };
 Data data;
 
@@ -80,6 +81,7 @@ uint32_t startSeconds = 0;
 uint32_t stopSeconds = 0;
 float temperature = 0.0;
 float humidity = 0.0;
+
 
 //Set Static IP**********************************************
 #ifdef STATIC_IP

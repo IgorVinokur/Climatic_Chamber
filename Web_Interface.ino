@@ -122,24 +122,26 @@ void build() {
         GP_MAKE_BOX(GP.PLAIN("Humidity Offset %"); GP.SPINNER("humidityOffset", data.humidityOffset, 0, 20, 1, 0, GP_GREEN, "60pix"));
 
       );
-
-      GP_MAKE_BLOCK_THIN_TAB(
-        "Calibration Offsets",
+    GP_MAKE_BLOCK_THIN_TAB(
+        "Reset",
         GP_MAKE_BOX(GP.BUTTON_MINI("espRestart", "Restart"));
       ); 
+
 
   } else if (ui.uri() == "/info") {
 
     GP_MAKE_BLOCK_TAB(
       "Connection Info",
-      GP.LABEL("WiFi mode: ");
-      GP.LABEL_BLOCK(WiFi.getMode() == WIFI_AP ? "AP" : "STA"); GP.BREAK(); GP.BREAK();
+     // GP.LABEL("WiFi mode: ");
+     // GP.LABEL_BLOCK(WiFi.getMode() == WIFI_AP ? "AP" : "STA"); GP.BREAK(); GP.BREAK();
 
-      GP.LABEL("Time synced");
-      GP.LED("leds", ntp.synced()); GP.BREAK();
-      //GP_MAKE_BOX(GP.LABEL("Time Zone"); GP.LABEL(data.gmt, "gmt"));
-      GP.TIME("nowTime", nowTime);
-      GP.DATE("nowDate", nowDate););
+     // GP.LABEL("Time synced");
+      //GP.LED("leds", ntp.synced()); GP.BREAK();
+      
+      //GP.TIME("nowTime", nowTime);
+      //GP.DATE("nowDate", nowDate);
+      GP.SYSTEM_INFO(); GP.BREAK(););
+      
 
 
 

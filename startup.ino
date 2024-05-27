@@ -26,6 +26,7 @@ void startup() {
     Serial.println(WiFi.softAPIP());
   } else {
     Serial.println(WiFi.localIP());
+    //ClientIP = WiFi.localIP().toString().c_str();
   }
 
   temp_relay_heating.setpoint = data.temp;        // установка (ставим на 40 градусов)
@@ -49,7 +50,7 @@ void startup() {
   eb.setEncType(EB_STEP4_LOW);
   eb.setFastTimeout(30);
 
-  ui.start("Smocker");
+  ui.start("cl-chamber");
   ui.attachBuild(build);
   ui.attach(action);
   ui.enableOTA();

@@ -19,5 +19,3 @@ void temprelay() { //Control Teperature
     }
   }
 }
-
-
