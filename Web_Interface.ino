@@ -123,6 +123,11 @@ void build() {
 
       );
 
+      GP_MAKE_BLOCK_THIN_TAB(
+        "Calibration Offsets",
+        GP_MAKE_BOX(GP.BUTTON_MINI("espRestart", "Restart"));
+      ); 
+
   } else if (ui.uri() == "/info") {
 
     GP_MAKE_BLOCK_TAB(

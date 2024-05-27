@@ -51,6 +51,7 @@ void loop() {
     // отдаем текущую дату и время переменным в веб интерфейс!!
     nowTime.set(ntp.hour(), ntp.minute(), ntp.second());
     nowDate.set(ntp.year(), ntp.month(), ntp.day());
+  
     
   }
 }  //loop()
