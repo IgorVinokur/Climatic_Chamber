@@ -4,10 +4,10 @@ void build() {
   GP.THEME(GP_DARK);
   GP.ICON_SUPPORT();
 
-  GP.PAGE_TITLE("Smocker");
+  GP.PAGE_TITLE("Climatic Chamber Controller");
   GP.ONLINE_CHECK();
   GP.UPDATE("nowDate,nowTime,startTime,stopTime,tempr,humid,releIndikator,sw_temp_enable,sw_humidity_enable,temp,temp_hys,tempmode_enable");
-  GP.TITLE("Smocker", "t1");
+  GP.TITLE("Climatic Chamber Controller", "t1");
   
   GP.HR();
 
