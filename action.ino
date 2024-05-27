@@ -92,6 +92,14 @@ void action() {
     if (ui.clickInt("minTempr", data.minTempr)) {
       eemem.updateNow();
     }
+    if (ui.clickInt("tempOffset", data.tempOffset)) {
+      eemem.updateNow();
+    }
+      if (ui.clickInt("humidityOffset", data.humidityOffset)) {
+      eemem.updateNow();
+    }
+
+
     if (ui.click("btn")) {
       data.rele_1_isOn = !data.rele_1_isOn;
       if (data.rele_1_isOn) digitalWrite(RELE1, ON);
