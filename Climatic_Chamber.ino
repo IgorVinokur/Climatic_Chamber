@@ -7,7 +7,7 @@ void setup() {
   
 
   ntp.begin();
-  ntp.setGMT(data.gmt);         // часовой пояс. Для Москвы: 3
+  ntp.setGMT(mydata.gmt);         // часовой пояс. Для Москвы: 3
  byte count = 0;
   while (!ntp.synced()) {
     ntp.updateNow();
@@ -34,7 +34,8 @@ void setup() {
 
 
 void loop() {
-  eemem.tick();
+ // eemem.tick();
+  data.tick(); 
   ui.tick();
   ntp.tick();
   eb.tick();

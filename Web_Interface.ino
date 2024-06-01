@@ -23,61 +23,61 @@ void build() {
       GP_MAKE_GRID(
       GP_MAKE_BLOCK_THIN_TAB(
         "Temperature Control °С",
-        if (data.sw_temp) {
-            GP_MAKE_BOX(GP.PLAIN("Temp. °С:"); GP.SPINNER("temp", data.temp, 5, 30, 0.5, 1, GP_GREEN, "60pix" ));
-            GP_MAKE_BOX(GP.PLAIN("Hysteresis °C:"); GP.SPINNER("temp_hys", data.temp_hys, 0, 10, 0.5, 1, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Heating Mode: "); GP.SWITCH("sw_tempmode", data.sw_tempmode));
+        if (mydata.sw_temp) {
+            GP_MAKE_BOX(GP.PLAIN("Temp. °С:"); GP.SPINNER("temp", mydata.temp, 5, 30, 0.5, 1, GP_GREEN, "60pix" ));
+            GP_MAKE_BOX(GP.PLAIN("Hysteresis °C:"); GP.SPINNER("temp_hys", mydata.temp_hys, 0, 10, 0.5, 1, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Heating Mode: "); GP.SWITCH("sw_tempmode", mydata.sw_tempmode));
             } 
-        GP.PLAIN("Enable:");GP.SWITCH("sw_temp", data.sw_temp););
+        GP.PLAIN("Enable:");GP.SWITCH("sw_temp", mydata.sw_temp););
         
 
       GP_MAKE_BLOCK_THIN_TAB(
         "Humidity Control %",
-        if (data.sw_humidity) {
-            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("humidity", data.humidity, 40, 90, 1, 0, GP_GREEN, "60pix" )); 
-            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:  "); GP.SPINNER("humidity_hys", data.humidity_hys, 0, 10, 1, 0, GP_GREEN, "60pix" ));
+        if (mydata.sw_humidity) {
+            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("humidity", mydata.humidity, 40, 90, 1, 0, GP_GREEN, "60pix" )); 
+            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:  "); GP.SPINNER("humidity_hys", mydata.humidity_hys, 0, 10, 1, 0, GP_GREEN, "60pix" ));
             } 
-        GP.PLAIN("Enable:"); GP.SWITCH("sw_humidity", data.sw_humidity);
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_humidity", mydata.sw_humidity);
         );
         );
 
       GP_MAKE_GRID(
       GP_MAKE_BLOCK_THIN_TAB(
         "Drainage %",
-        if (data.sw_drainage) {
-        GP_MAKE_BOX(GP.PLAIN("Drainage %:"); GP.SPINNER("drainage", data.drainage, 40, 90, 1, 0, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Hysteresis %:"); GP.SPINNER("drainage_hys", data.drainage_hys, 0, 10, 1, 0, GP_GREEN, "60pix"));
+        if (mydata.sw_drainage) {
+        GP_MAKE_BOX(GP.PLAIN("Drainage %:"); GP.SPINNER("drainage", mydata.drainage, 40, 90, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Hysteresis %:"); GP.SPINNER("drainage_hys", mydata.drainage_hys, 0, 10, 1, 0, GP_GREEN, "60pix"));
         }
-        GP.PLAIN("Enable:"); GP.SWITCH("sw_drainage", data.sw_drainage););
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_drainage", mydata.sw_drainage););
 
       GP_MAKE_BLOCK_THIN_TAB(
         "Air Circulation",
-        if (data.sw_a_circulation) {
-        GP_MAKE_BOX(GP.PLAIN("Period Hrs:");GP.SPINNER("air_circulation_Hours", data.air_circulation_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("circulation_work_time", data.circulation_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Fan:"); GP.SLIDER("fan_pwr", data.fan_pwr, 0, 100, 1));
+        if (mydata.sw_a_circulation) {
+        GP_MAKE_BOX(GP.PLAIN("Period Hrs:");GP.SPINNER("air_circulation_Hours", mydata.air_circulation_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("circulation_work_time", mydata.circulation_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Fan:"); GP.SLIDER("fan_pwr", mydata.fan_pwr, 0, 100, 1));
         }
-        GP.PLAIN("Enable:"); GP.SWITCH("sw_a_circulation", data.sw_a_circulation);
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_a_circulation", mydata.sw_a_circulation);
       );
       );
       
       GP_MAKE_GRID(
       GP_MAKE_BLOCK_THIN_TAB(
         "Ventilation",
-        if (data.sw_ventilation) {
-        GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("venta_Hours", data.venta_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("venta_work_time", data.venta_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
+        if (mydata.sw_ventilation) {
+        GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("venta_Hours", mydata.venta_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("venta_work_time", mydata.venta_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
         }
-        GP.PLAIN("Enable:"); GP.SWITCH("sw_ventilation", data.sw_ventilation);
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_ventilation", mydata.sw_ventilation);
       );
 
       GP_MAKE_BLOCK_THIN_TAB(
         "Quartz Lamp",
-         if (data.sw_q_lamp) {
-        GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("quartz_Hours", data.quartz_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("quartz_work_time", data.quartz_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
+         if (mydata.sw_q_lamp) {
+        GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("quartz_Hours", mydata.quartz_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("quartz_work_time", mydata.quartz_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
          }
-        GP.PLAIN("Enable:"); GP.SWITCH("sw_q_lamp", data.sw_q_lamp);
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_q_lamp", mydata.sw_q_lamp);
       );
       );
 
@@ -92,13 +92,13 @@ void build() {
       "/setup", "SAVE",
       GP_MAKE_BLOCK_TAB(
         "Set TimeZone",
-        GP_MAKE_BOX(GP.LABEL("GMT"); GP.NUMBER("gmt", "GMT", data.gmt)););
+        GP_MAKE_BOX(GP.LABEL("GMT"); GP.NUMBER("gmt", "GMT", mydata.gmt)););
 
       GP_MAKE_BLOCK_TAB(
         "WiFi Configuration",
-        GP_MAKE_BOX(GP.LABEL("SSID: "); GP.TEXT("ssid", "SSID", data.ssid));
-        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", data.pass));
-        GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", data.AP_ssid));););
+        GP_MAKE_BOX(GP.LABEL("SSID: "); GP.TEXT("ssid", "SSID", mydata.ssid));
+        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", mydata.pass));
+        GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", mydata.AP_ssid));););
 
     GP_MAKE_BLOCK_THIN_TAB(
       "File Manager",
@@ -118,8 +118,8 @@ void build() {
     //все обновляющиеся параметры на WEB странице надо указать тут
     GP_MAKE_BLOCK_THIN_TAB(
         "Calibration Offsets",
-        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", data.tempOffset, -10, 10, 0.5, 1, GP_GREEN, "60pix"));
-        GP_MAKE_BOX(GP.PLAIN("Humidity Offset %"); GP.SPINNER("humidityOffset", data.humidityOffset, 0, 20, 1, 0, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", mydata.tempOffset, -10, 10, 0.5, 1, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Humidity Offset %"); GP.SPINNER("humidityOffset", mydata.humidityOffset, 0, 20, 1, 0, GP_GREEN, "60pix"));
 
       );
     GP_MAKE_BLOCK_THIN_TAB(
@@ -168,26 +168,26 @@ void build() {
     GP.BREAK();
     GP.HR();
     GP.LABEL("Включим нагрузку в: ");
-    GP.TIME("startTime", data.startTime);
+    GP.TIME("startTime", mydata.startTime);
     GP.BREAK();
     GP.LABEL("и выключим после: ");
-    GP.TIME("stopTime", data.stopTime);
+    GP.TIME("stopTime", mydata.stopTime);
     GP.BREAK();
     GP.BREAK();
     GP.LABEL("Либо включать по температуре ");
-    GP.SWITCH("sw", data.dependbyTempr);
+    GP.SWITCH("sw", mydata.dependbyTempr);
     GP.BREAK();
     GP.LABEL("включать нагрузку при: ");
-    GP.NUMBER("minTempr", "number", data.minTempr);
+    GP.NUMBER("minTempr", "number", mydata.minTempr);
     GP.LABEL("°С");
     GP.BREAK();
     GP.LABEL("отключать при: ");
-    GP.NUMBER("maxTempr", "number", data.maxTempr);
+    GP.NUMBER("maxTempr", "number", mydata.maxTempr);
     GP.LABEL("°С");
     GP.BREAK();
     GP.BREAK();
     GP.LABEL("Реле 1:");
-    GP.LED_RED("releIndikator", data.rele_1_isOn);
+    GP.LED_RED("releIndikator", mydata.rele_1_isOn);
     GP.BREAK();
     //  GP.BUTTON("btn", "Вкл / Откл");
     //  GP.BREAK();

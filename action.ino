@@ -4,8 +4,8 @@ void action() {
   
     ui.updateDate("nowDate", nowDate);
     ui.updateTime("nowTime", nowTime);
-    ui.updateTime("startTime", data.startTime);
-    ui.updateTime("stopTime", data.stopTime);
+    ui.updateTime("startTime", mydata.startTime);
+    ui.updateTime("stopTime", mydata.stopTime);
     ui.updateInt("tempr", temperature);
     ui.updateInt("humid", humidity);
 
@@ -16,30 +16,30 @@ void action() {
   // ================== CONFIG ==================
   if (ui.form()) {
     if (ui.form("/cfg")) {
-      eemem.update();
-      ui.copyFloat("temp", data.temp);
-      ui.copyFloat("temp_hys", data.temp_hys);
-      ui.copyInt("humidity", data.humidity);
-      ui.copyInt("humidity_hys", data.humidity_hys);
-      ui.copyInt("drainage", data.drainage);
-      ui.copyInt("drainage_hys", data.drainage_hys);
-      ui.copyInt("air_circulation_Hours", data.air_circulation_Hours);
-      ui.copyInt("circulation_work_time", data.circulation_work_time);
-      ui.copyFloat("fan_pwr", data.fan_pwr);
-      ui.copyInt("venta_Hours", data.venta_Hours);
-      ui.copyInt("venta_work_time", data.venta_work_time);
-      ui.copyInt("quartz_Hours", data.quartz_Hours);
-      ui.copyInt("quartz_work_time", data.quartz_work_time);
-      ui.copyFloat("tempOffset", data.tempOffset);
-      ui.copyInt("humidityOffset", data.humidityOffset);
+      data.update();
+      ui.copyFloat("temp", mydata.temp);
+      ui.copyFloat("temp_hys", mydata.temp_hys);
+      ui.copyInt("humidity", mydata.humidity);
+      ui.copyInt("humidity_hys", mydata.humidity_hys);
+      ui.copyInt("drainage", mydata.drainage);
+      ui.copyInt("drainage_hys", mydata.drainage_hys);
+      ui.copyInt("air_circulation_Hours", mydata.air_circulation_Hours);
+      ui.copyInt("circulation_work_time", mydata.circulation_work_time);
+      ui.copyFloat("fan_pwr", mydata.fan_pwr);
+      ui.copyInt("venta_Hours", mydata.venta_Hours);
+      ui.copyInt("venta_work_time", mydata.venta_work_time);
+      ui.copyInt("quartz_Hours", mydata.quartz_Hours);
+      ui.copyInt("quartz_work_time", mydata.quartz_work_time);
+      ui.copyFloat("tempOffset", mydata.tempOffset);
+      ui.copyInt("humidityOffset", mydata.humidityOffset);
       
     }
     else if (ui.form("/setup")) {
-      eemem.update();
-      ui.copyStr("ssid", data.ssid);
-      ui.copyStr("pass", data.pass);
-      ui.copyStr("ap_ssid", data.AP_ssid);
-      ui.copyInt("gmt", data.gmt);
+      data.update();
+      ui.copyStr("ssid", mydata.ssid);
+      ui.copyStr("pass", mydata.pass);
+      ui.copyStr("ap_ssid", mydata.AP_ssid);
+      ui.copyInt("gmt", mydata.gmt);
     }
   }  
   
@@ -53,58 +53,58 @@ void action() {
       //      Serial.println(valTime.encode());
     }
     // обновление времени запуска и отключения нагрузки
-    if (ui.clickTime("startTime", data.startTime)) {
-      startSeconds = data.startTime.hour * 60 * 60 + data.startTime.minute * 60 + data.startTime.second;
-      eemem.update();
+    if (ui.clickTime("startTime", mydata.startTime)) {
+      startSeconds = mydata.startTime.hour * 60 * 60 + mydata.startTime.minute * 60 + mydata.startTime.second;
+      data.update();
     }
-    if (ui.clickTime("stopTime", data.stopTime)) {
-      stopSeconds = data.stopTime.hour * 60 * 60 + data.stopTime.minute * 60 + data.stopTime.second;
-      eemem.updateNow();
+    if (ui.clickTime("stopTime", mydata.stopTime)) {
+      stopSeconds = mydata.stopTime.hour * 60 * 60 + mydata.stopTime.minute * 60 + mydata.stopTime.second;
+      data.update();
     }
-    if (ui.clickBool("sw", data.dependbyTempr)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw", mydata.dependbyTempr)) {
+      data.update();
     }
-     if (ui.clickBool("sw_temp", data.sw_temp)) {
-      eemem.updateNow();
+     if (ui.clickBool("sw_temp", mydata.sw_temp)) {
+      data.update();
     }
-     if (ui.clickBool("sw_tempmode", data.sw_tempmode)) {
-      eemem.updateNow();
+     if (ui.clickBool("sw_tempmode", mydata.sw_tempmode)) {
+      data.update();
      }
-    if (ui.clickBool("sw_humidity", data.sw_humidity)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw_humidity", mydata.sw_humidity)) {
+      data.update();
     }
-    if (ui.clickBool("sw_drainage", data.sw_drainage)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw_drainage", mydata.sw_drainage)) {
+      data.update();
     }
-    if (ui.clickBool("sw_a_circulation", data.sw_a_circulation)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw_a_circulation", mydata.sw_a_circulation)) {
+      data.update();
     }
-    if (ui.clickBool("sw_ventilation", data.sw_ventilation)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw_ventilation", mydata.sw_ventilation)) {
+      data.update();
     }
-    if (ui.clickBool("sw_q_lamp", data.sw_q_lamp)) {
-      eemem.updateNow();
+    if (ui.clickBool("sw_q_lamp", mydata.sw_q_lamp)) {
+      data.update();
     }
 
-    if (ui.clickInt("maxTempr", data.maxTempr)) {
-      eemem.updateNow();
+    if (ui.clickInt("maxTempr", mydata.maxTempr)) {
+      data.update();
     }
-    if (ui.clickInt("minTempr", data.minTempr)) {
-      eemem.updateNow();
+    if (ui.clickInt("minTempr", mydata.minTempr)) {
+      data.update();
     }
-    if (ui.clickFloat("tempOffset", data.tempOffset)) {
-      eemem.updateNow();
+    if (ui.clickFloat("tempOffset", mydata.tempOffset)) {
+      data.update();
     }
-      if (ui.clickInt("humidityOffset", data.humidityOffset)) {
-      eemem.updateNow();
+      if (ui.clickInt("humidityOffset", mydata.humidityOffset)) {
+      data.update();
     }
 
 
     if (ui.click("btn")) {
-      data.rele_1_isOn = !data.rele_1_isOn;
-      if (data.rele_1_isOn) digitalWrite(RELE1, ON);
+      mydata.rele_1_isOn = !mydata.rele_1_isOn;
+      if (mydata.rele_1_isOn) digitalWrite(RELE1, ON);
       else digitalWrite(RELE1, OFF);
-      eemem.updateNow();
+      data.update();
     }
     if (ui.click("espRestart")) {
       Serial.println("Controller Restart");

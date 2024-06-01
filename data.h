@@ -35,6 +35,8 @@ EncButton eb(18, 8, 3);
 
 #include <LittleFS.h>
 
+#include <FileData.h>       // Замена епрома
+
 #include <GyverPortal.h>
 GyverPortal ui(&LittleFS);
 
@@ -76,10 +78,13 @@ struct Data {
   int16_t maxTempr = 0;
   
 };
-Data data;
+Data mydata;
 
-#include <EEManager.h>  // подключаем либу
-EEManager eemem(data);  // передаём нашу переменную (фактически её адрес)
+FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
+
+
+//#include <EEManager.h>  // подключаем либу
+//EEManager eemem(data);  // передаём нашу переменную (фактически её адрес)
 //#include <EEPROM.h>
 
  bool dependByTime = 1;  // флаг разрешения включения реле по времени
