@@ -15,13 +15,20 @@ void startup() {
       fail = 1;
       break;
     }
+  while (!LittleFS.begin()) {           // Инициализация файловой системы
+    LittleFS.format();
+  }
+
+
+  if (!LittleFS.begin()) Serial.println("FS Error");
+    
     Serial.print(".");
     delay(500);
   }
 
   if (fail) {
     WiFi.mode(WIFI_AP);
-    WiFi.softAP(data.AP_ssid);
+    WiFi.softAP("Climaatic Chamber");
     Serial.println("Fail! AP mode");
     Serial.println(WiFi.softAPIP());
   } else {

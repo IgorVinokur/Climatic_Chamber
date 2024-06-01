@@ -7,9 +7,19 @@
 #define RELE_Q_LAMP 13
 #define ON 0
 #define OFF 1
+#define I2C_SDA 48
+#define I2C_SCL 47
 #define SEALEVELPRESSURE_HPA (1013.25)
+//#define Debug
+float temperature = 0.0;
+float humidity = 0.0;
 
 
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
+TwoWire I2CBME = TwoWire(0);
+Adafruit_BME280 bme;
 
 
 #include <GyverNTP.h>
@@ -28,9 +38,7 @@ EncButton eb(18, 8, 3);
 #include <GyverPortal.h>
 GyverPortal ui(&LittleFS);
 
-#include <Wire.h>
-#include <Adafruit_BME280.h>  // для датчика BME280
-Adafruit_BME280 bme;          // I2C
+
 
 struct Data {
   char ssid[20] = "";
@@ -79,8 +87,7 @@ GPdate nowDate;
 GPtime nowTime;
 uint32_t startSeconds = 0;
 uint32_t stopSeconds = 0;
-float temperature = 0.0;
-float humidity = 0.0;
+
 
 
 //Set Static IP**********************************************

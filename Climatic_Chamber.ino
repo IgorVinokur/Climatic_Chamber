@@ -4,7 +4,7 @@ void setup() {
 
   startup();
  
-  if (!LittleFS.begin()) Serial.println("FS Error");
+  
 
   ntp.begin();
   ntp.setGMT(data.gmt);         // часовой пояс. Для Москвы: 3
@@ -15,7 +15,7 @@ void setup() {
     if (++count > 10) break;
   }
 
-                         // bme280Init();
+  bme280Init();
   //EEPROM.begin(100);     // выделить память (больше или равно размеру структуры данных)
   //eemem.begin(0, 'e');  // изменить букву в скобках на другую, чтобы восстановить настройки по умолчанию
 
@@ -46,7 +46,7 @@ void loop() {
   if (millis() - ms1 >= 1000) {
     ms1 = millis();
 
-    //  bme280Read();
+    bme280Read();
 
     // отдаем текущую дату и время переменным в веб интерфейс
     nowTime.set(ntp.hour(), ntp.minute(), ntp.second());

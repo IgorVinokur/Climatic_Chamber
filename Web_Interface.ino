@@ -97,7 +97,7 @@ void build() {
       GP_MAKE_BLOCK_TAB(
         "WiFi Configuration",
         GP_MAKE_BOX(GP.LABEL("SSID: "); GP.TEXT("ssid", "SSID", data.ssid));
-        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.TEXT("pass", "Pass", data.pass));
+        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", data.pass));
         GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", data.AP_ssid));););
 
     GP_MAKE_BLOCK_THIN_TAB(
@@ -118,7 +118,7 @@ void build() {
     //все обновляющиеся параметры на WEB странице надо указать тут
     GP_MAKE_BLOCK_THIN_TAB(
         "Calibration Offsets",
-        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", data.tempOffset, 0, 10, 0.5, 1, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", data.tempOffset, -10, 10, 0.5, 1, GP_GREEN, "60pix"));
         GP_MAKE_BOX(GP.PLAIN("Humidity Offset %"); GP.SPINNER("humidityOffset", data.humidityOffset, 0, 20, 1, 0, GP_GREEN, "60pix"));
 
       );

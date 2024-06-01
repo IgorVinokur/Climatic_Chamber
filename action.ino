@@ -92,7 +92,7 @@ void action() {
     if (ui.clickInt("minTempr", data.minTempr)) {
       eemem.updateNow();
     }
-    if (ui.clickInt("tempOffset", data.tempOffset)) {
+    if (ui.clickFloat("tempOffset", data.tempOffset)) {
       eemem.updateNow();
     }
       if (ui.clickInt("humidityOffset", data.humidityOffset)) {
@@ -106,7 +106,7 @@ void action() {
       else digitalWrite(RELE1, OFF);
       eemem.updateNow();
     }
-    if (ui.clickDown("espRestart")) {
+    if (ui.click("espRestart")) {
       Serial.println("Controller Restart");
       ESP.restart();
     }
