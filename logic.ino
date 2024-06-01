@@ -1,6 +1,6 @@
 void temprelay() { //Control Teperature
-  if (data.sw_temp) {
-    if (data.sw_tempmode) {  // If TempMode 1= Heating
+  if (mydata.sw_temp) {
+    if (mydata.sw_tempmode) {  // If TempMode 1= Heating
       static uint32_t tempRelayTimer = 0;
       if (millis() - tempRelayTimer > 2000) {  // Set mills timer to 2 seconds
         tempRelayTimer = millis();
