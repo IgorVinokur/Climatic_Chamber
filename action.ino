@@ -36,10 +36,14 @@ void action() {
     }
     else if (ui.form("/setup")) {
       data.update();
-      ui.copyStr("ssid", mydata.ssid);
-      ui.copyStr("pass", mydata.pass);
-      ui.copyStr("ap_ssid", mydata.AP_ssid);
+      ui.copyStr("ssid", mydata.staSsid);
+      ui.copyStr("pass", mydata.staPass);
+      ui.copyStr("ap_ssid", mydata.apSsid);
+      ui.copyStr("ap_pass", mydata.apPass);
       ui.copyInt("gmt", mydata.gmt);
+     if (strlen(mydata.apSsid) < 1)  strcpy(mydata.apSsid, AP_DEFAULT_SSID);   // Check if AP name is not empty
+     if (strlen(mydata.apPass) < 8)  strcpy(mydata.apPass, AP_DEFAULT_PASS);   // Check if Password AP is not empty or low than 8 characters
+    
     }
   }  
   

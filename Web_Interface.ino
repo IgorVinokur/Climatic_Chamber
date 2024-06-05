@@ -96,9 +96,12 @@ void build() {
 
       GP_MAKE_BLOCK_TAB(
         "WiFi Configuration",
-        GP_MAKE_BOX(GP.LABEL("SSID: "); GP.TEXT("ssid", "SSID", mydata.ssid));
-        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", mydata.pass));
-        GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", mydata.AP_ssid));););
+        GP_MAKE_BOX(GP.LABEL("SSID: "); GP.TEXT("ssid", "SSID", mydata.staSsid));
+        GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", mydata.staPass));
+        GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", mydata.apSsid));
+        GP_MAKE_BOX(GP.LABEL("AP Pass: "); GP.TEXT("ap_pass", "AP Password", mydata.apPass));
+        ););
+
 
     GP_MAKE_BLOCK_THIN_TAB(
       "File Manager",

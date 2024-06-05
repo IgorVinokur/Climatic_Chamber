@@ -1,4 +1,8 @@
 #define STATIC_IP  // закомментировать если подключаетесь к мобильной точке доступа на телефоне
+#define AP_DEFAULT_SSID   "Climatic Chamber"   // Стандартное имя точки доступа ESP (До 20-ти символов)
+#define AP_DEFAULT_PASS   "00000000"    // Стандартный пароль точки доступа ESP (До 20-ти символов)
+#define STA_DEFAULT_SSID  ""            // Стандартное имя точки доступа роутера (До 20-ти символов)
+#define STA_DEFAULT_PASS  ""            // Стандартный пароль точки доступа роутера (До 20-ти символов)
 #define RELE1 14
 #define RELE_TEMP 9
 #define RELE_THUM 10
@@ -43,9 +47,10 @@ GyverPortal ui(&LittleFS);
 
 
 struct Data {
-  char ssid[20] = "";
-  char pass[20] = "";
-  char AP_ssid[20] = "";
+  char apSsid[21] = AP_DEFAULT_SSID;    // Имя сети для AP режима по умолчанию
+  char apPass[21] = AP_DEFAULT_PASS;    // Пароль сети для AP режима по умолчанию
+  char staSsid[21] = STA_DEFAULT_SSID;  // Имя сети для STA режима по умолчанию
+  char staPass[21] = STA_DEFAULT_PASS;  // Пароль сети для STA режима по умолчанию
   int gmt = 2;
   float temp = 10.0;
   float temp_hys = 0.0;

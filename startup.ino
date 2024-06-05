@@ -36,8 +36,8 @@ void startup() {
 
 
   WiFi.mode(WIFI_STA);
-  Serial.println(String("Connecting ") + mydata.ssid + ',' + mydata.pass);
-  WiFi.begin(mydata.ssid, mydata.pass);
+  Serial.println(String("Connecting ") + mydata.staSsid + ',' + mydata.staPass);
+  WiFi.begin(mydata.staSsid, mydata.staPass);
   uint32_t tmr = millis();
   bool fail = false;
   while (WiFi.status() != WL_CONNECTED) {
@@ -53,7 +53,7 @@ void startup() {
 
   if (fail) {
     WiFi.mode(WIFI_AP);
-    WiFi.softAP("Climaatic Chamber");
+    WiFi.softAP(mydata.apSsid, mydata.apPass);  // Create AP
     Serial.println("Fail! AP mode");
     Serial.println(WiFi.softAPIP());
   } else {
