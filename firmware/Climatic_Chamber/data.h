@@ -14,34 +14,41 @@
 #define I2C_SDA 48
 #define I2C_SCL 47
 #define SEALEVELPRESSURE_HPA (1013.25)
+#define TFT_CS   38 //Display SPI
+#define TFT_DC   37 //Display SPI
+#define TFT_RST  36 //Display SPI
+#define DISPLAY_WIDTH  320 // Display Size
+#define DISPLAY_HEIGHT 170 //Display Size
+//#define TFT_SDA  35
+//#define TFT_SCLK 45
+
+
 //#define Debug
 float temperature = 0.0;
 float humidity = 0.0;
 
 
+//**********Libraries*****************
+#include <LittleFS.h>
+#include <FileData.h>       // Замена епрома
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_ST7789.h>
 #include <Adafruit_BME280.h>
+#include <GyverNTP.h>
+#include <GyverRelay.h>
+#include <EncButton.h>
+#include <GyverPortal.h>
+
+//***********Objects******************
 TwoWire I2CBME = TwoWire(0);
 Adafruit_BME280 bme;
-
-
-#include <GyverNTP.h>
+Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 GyverNTP ntp(2);
-
-#include <GyverRelay.h>
 GyverRelay  temp_relay_cooling(NORMAL);
 GyverRelay  temp_relay_heating(REVERSE);
-
-#include <EncButton.h>
 EncButton eb(18, 8, 3);
-
-
-#include <LittleFS.h>
-
-#include <FileData.h>       // Замена епрома
-
-#include <GyverPortal.h>
 GyverPortal ui(&LittleFS);
 
 
@@ -84,7 +91,6 @@ struct Data {
   
 };
 Data mydata;
-
 FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
 
 
@@ -92,7 +98,7 @@ FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
 //EEManager eemem(data);  // передаём нашу переменную (фактически её адрес)
 //#include <EEPROM.h>
 
- bool dependByTime = 1;  // флаг разрешения включения реле по времени
+bool dependByTime = 1;  // флаг разрешения включения реле по времени
 GPdate nowDate;
 GPtime nowTime;
 uint32_t startSeconds = 0;
