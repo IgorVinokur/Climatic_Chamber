@@ -64,12 +64,12 @@ void startup() {
   temp_relay_heating.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
   temp_relay_heating.hysteresis = mydata.temp_hys;  // ширина гистерезиса
   temp_relay_heating.k = 0.5;                          // коэффициент обратной связи (подбирается по факту)
-
   temp_relay_cooling.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
   temp_relay_cooling.hysteresis = mydata.temp_hys;  // ширина гистерезиса
   temp_relay_cooling.k = 0.5;                          // коэффициент обратной связи (подбирается по факту)
 
-
+//Display Init
+  displayInit();
 
   //Encoder Settings
   eb.setBtnLevel(LOW);
