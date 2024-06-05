@@ -1,4 +1,7 @@
 # Climatic Chamber Controller
+![alt text](https://github.com/IgorVinokur/Climatic_Chamber/blob/main/img/cc1.png)
+
+
 
 > [!IMPORTANT]
 >***!!! The system is still in development !!!***
