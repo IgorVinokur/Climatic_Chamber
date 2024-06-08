@@ -3,24 +3,24 @@
 #define AP_DEFAULT_PASS   "00000000"    // Стандартный пароль точки доступа ESP (До 20-ти символов)
 #define STA_DEFAULT_SSID  ""            // Стандартное имя точки доступа роутера (До 20-ти символов)
 #define STA_DEFAULT_PASS  ""            // Стандартный пароль точки доступа роутера (До 20-ти символов)
-#define RELE1 14
-#define RELE_TEMP 9
-#define RELE_THUM 10
-#define RELE_DRAIN 11
-#define RELE_C_VENTA 12
-#define RELE_Q_LAMP 13
+#define RELE1 4
+#define RELE_TEMP 5
+#define RELE_THUM 6
+#define RELE_DRAIN 7
+#define RELE_C_VENTA 15
+#define RELE_Q_LAMP 16
 #define ON 0
 #define OFF 1
 #define I2C_SDA 48
 #define I2C_SCL 47
 #define SEALEVELPRESSURE_HPA (1013.25)
-#define TFT_CS   38 //Display SPI
-#define TFT_DC   37 //Display SPI
-#define TFT_RST  36 //Display SPI
-#define DISPLAY_WIDTH  320 // Display Size
-#define DISPLAY_HEIGHT 170 //Display Size
-//#define TFT_SDA  35
-//#define TFT_SCLK 45
+#define TFT_CS   10 //Display SPI
+#define TFT_DC   9 //Display SPI
+#define TFT_RST  8 //Display SPI
+//#define TFT_SDA  11
+//#define TFT_SCLK 12
+#define DISPLAY_WIDTH  170 // Display Size
+#define DISPLAY_HEIGHT 320 //Display Size
 
 
 //#define Debug
@@ -97,12 +97,14 @@ FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
 //#include <EEManager.h>  // подключаем либу
 //EEManager eemem(data);  // передаём нашу переменную (фактически её адрес)
 //#include <EEPROM.h>
+bool mainDisplay = 0;
 
 bool dependByTime = 1;  // флаг разрешения включения реле по времени
 GPdate nowDate;
 GPtime nowTime;
 uint32_t startSeconds = 0;
 uint32_t stopSeconds = 0;
+
 
 
 

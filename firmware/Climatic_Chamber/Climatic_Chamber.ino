@@ -40,7 +40,8 @@ void loop() {
   ntp.tick();
   eb.tick();
   temprelay();
-  buildDisplay();
+
+  //buildDisplay();
   
 
   // раз в 1 сек делаем дела
@@ -54,8 +55,13 @@ void loop() {
     nowTime.set(ntp.hour(), ntp.minute(), ntp.second());
     nowDate.set(ntp.year(), ntp.month(), ntp.day());
     // если разрешено, включаем по времени нагрузку ( свет или насос)
-
-    
+    if (mainDisplay){
+      tft.setCursor(130, 10);
+      tft.setTextSize(2);
+      tft.setTextColor(ST77XX_BLACK);
+      tft.setTextColor(ST77XX_WHITE);
+      tft.println(ntp.timeString());
+    }   //Serial.println(ntp.timeString());
 
   }
 }  //loop()
