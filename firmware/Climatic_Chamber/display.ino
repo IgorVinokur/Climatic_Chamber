@@ -23,7 +23,7 @@ void MainDisplay() {
   tft.setTextColor(ST77XX_WHITE);
   tft.setCursor(130, 10);
   tft.setTextSize(2);
-  tft.println(ntp.timeString());
+  //tft.println(ntp.timeString());
   tft.setCursor(1, 40);
   tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
   tft.setCursor(10, 80);
