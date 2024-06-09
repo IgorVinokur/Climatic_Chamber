@@ -19,13 +19,19 @@
 #define TFT_RST  8 //Display SPI
 //#define TFT_SDA  11
 //#define TFT_SCLK 12
+#define ENCODER_PIN_A 2
+#define ENCODER_PIN_B 3
+#define ENCODER_PIN_SW 4
+
 #define DISPLAY_WIDTH  170 // Display Size
 #define DISPLAY_HEIGHT 320 //Display Size
 
 
 //#define Debug
-float temperature = 0.0;
-float humidity = 0.0;
+float rowtemperature = 0.0; //temperature from sensor
+float rowhumidity = 0.0;    //humidity from sensor
+float temperature = 0.0;   //calibrated temperature
+float humidity = 0.0;      //calibrated humidity
 
 
 //**********Libraries*****************
@@ -48,7 +54,7 @@ Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 GyverNTP ntp(2);
 GyverRelay  temp_relay_cooling(NORMAL);
 GyverRelay  temp_relay_heating(REVERSE);
-EncButton eb(18, 8, 3);
+EncButton enc(ENCODER_PIN_A, ENCODER_PIN_B, ENCODER_PIN_SW);
 GyverPortal ui(&LittleFS);
 
 
@@ -98,6 +104,7 @@ FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
 //EEManager eemem(data);  // передаём нашу переменную (фактически её адрес)
 //#include <EEPROM.h>
 bool mainDisplay = 0;
+//time_t previusTimestring;
 
 bool dependByTime = 1;  // флаг разрешения включения реле по времени
 GPdate nowDate;

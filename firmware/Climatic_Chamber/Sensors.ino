@@ -18,8 +18,12 @@ void bme280Init() {
 
 // считываем температуру, влажность
 void bme280Read() {
-  temperature = bme.readTemperature();
-  humidity = bme.readHumidity();
+  float previusTemp;
+  float previusHum;
+  rowtemperature = bme.readTemperature();
+  rowhumidity = bme.readHumidity();
+  temperature = bme.readTemperature() + mydata.tempOffset;
+  humidity = bme.readHumidity() + mydata.humidityOffset;
   #ifdef Debug
   Serial.print("Temperature = ");
   Serial.print(bme.readTemperature());
@@ -34,4 +38,24 @@ void bme280Read() {
   //    Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
   //    Serial.println(" m");
   #endif
+
+  if (mainDisplay){
+    
+    tft.setTextColor(ST77XX_BLACK);
+    tft.setCursor(1, 40);
+    tft.setTextSize(2);
+    tft.printf("Temp: %.2f C", previusTemp);
+    tft.setCursor(40, 40);
+    tft.printf("Hum: %.2f %%", previusHum);
+    tft.setTextColor(ST77XX_WHITE);
+    tft.setTextSize(2);
+    tft.setCursor(1, 40);
+    previusTemp = temperature;
+    previusHum = humidity;
+    tft.printf("Temp: %.2f C", temperature);
+    tft.setCursor(40, 40);
+    tft.printf("Hum: %.2f %%", humidity);
+    
+  }
+    //tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
 } //bme280Read()
