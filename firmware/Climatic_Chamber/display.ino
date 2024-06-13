@@ -24,8 +24,10 @@ void MainDisplay() {
   tft.setTextSize(2);
   tft.setCursor(130, 10);
     //tft.println(ntp.timeString());
-  tft.drawLine(10, 30, 300, 30, ST77XX_YELLOW);
-  tft.setCursor(10, 80);
+  tft.drawLine(1, 30, 320, 30, ST77XX_YELLOW);
+  tft.drawLine(220, 31, 220, 170, ST77XX_GREEN);
+  tft.drawLine(220, 100, 320, 100, ST77XX_GREEN);
+  //tft.setCursor(10, 80);
   //tft.println("Humidity: " + String(humidity) + " %");
   //tft.fillScreen(ST77XX_BLACK);
 }

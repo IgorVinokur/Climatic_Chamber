@@ -20,10 +20,14 @@ void bme280Init() {
 void bme280Read() {
   float previusTemp;
   float previusHum;
-  rowtemperature = bme.readTemperature();
-  rowhumidity = bme.readHumidity();
-  temperature = bme.readTemperature() + mydata.tempOffset;
-  humidity = bme.readHumidity() + mydata.humidityOffset;
+  rowtemperature = (int) bme.readTemperature();
+  rowhumidity = (int) bme.readHumidity();
+  temperature = rowtemperature + mydata.tempOffset;
+  humidity = rowhumidity + mydata.humidityOffset;
+  Serial.print("Temperature = ");
+  Serial.println(temperature);
+  Serial.print("Humidity = ");
+  Serial.println(humidity);
   #ifdef Debug
   Serial.print("Temperature = ");
   Serial.print(bme.readTemperature());
@@ -42,20 +46,32 @@ void bme280Read() {
   if (mainDisplay){
     
     tft.setTextColor(ST77XX_BLACK);
-    tft.setCursor(1, 40);
-    tft.setTextSize(2);
-    tft.printf("Temp: %.2f C", previusTemp);
-    tft.setCursor(40, 40);
-    tft.printf("Hum: %.2f %%", previusHum);
+    tft.setCursor(235, 72);
+    tft.setTextSize(3);
+    //tft.printf("%.2fC", previusTemp);
+    tft.println(String(previusTemp));
+    tft.setCursor(240, 140);
+    //tft.printf("%.1f%%", previusHum);
+    tft.println(String(previusHum));
     tft.setTextColor(ST77XX_WHITE);
-    tft.setTextSize(2);
-    tft.setCursor(1, 40);
+    tft.setTextSize(3);
+    tft.setCursor(230, 35);
+    tft.println("Temp");
+    tft.setCursor(235, 72);
+    //tft.printf("%.2fC", temperature);
+    //tft.setTextSize(2);
     previusTemp = temperature;
     previusHum = humidity;
-    tft.printf("Temp: %.2f C", temperature);
-    tft.setCursor(40, 40);
-    tft.printf("Hum: %.2f %%", humidity);
+    tft.println(String(temperature) + "C");
+    tft.setCursor(235, 110);
+    tft.setTextSize(3);
+    tft.println("Hum");
+    tft.setCursor(240, 140);
+    //tft.printf("%.1f%%", humidity);
+    //tft.setTextSize(3);
+    tft.println(String(humidity) + "%");
     
+
   }
     //tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
 } //bme280Read()

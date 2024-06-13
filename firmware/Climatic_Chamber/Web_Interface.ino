@@ -5,7 +5,7 @@ void build() {
   GP.ICON_SUPPORT();
 
   GP.PAGE_TITLE("Climatic Chamber Controller");
-  GP.ONLINE_CHECK();
+  //GP.ONLINE_CHECK();
   GP.UPDATE("nowDate,nowTime,startTime,stopTime,tempr,humid,releIndikator,sw_temp_enable,sw_humidity_enable,temp,temp_hys,tempmode_enable");
   GP.TITLE("Climatic Chamber Controller", "t1");
   
@@ -24,8 +24,8 @@ void build() {
       GP_MAKE_BLOCK_THIN_TAB(
         "Temperature Control °С",
         if (mydata.sw_temp) {
-            GP_MAKE_BOX(GP.PLAIN("Temp. °С:"); GP.SPINNER("temp", mydata.temp, 5, 30, 0.5, 1, GP_GREEN, "60pix" ));
-            GP_MAKE_BOX(GP.PLAIN("Hysteresis °C:"); GP.SPINNER("temp_hys", mydata.temp_hys, 0, 10, 0.5, 1, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Temp. °С:"); GP.SPINNER("temp", mydata.temp, 5, 30, 1, 1, GP_GREEN, "60pix" ));
+            GP_MAKE_BOX(GP.PLAIN("Hysteresis °C:"); GP.SPINNER("temp_hys", mydata.temp_hys, 0, 10, 1, 1, GP_GREEN, "60pix"));
             GP_MAKE_BOX(GP.PLAIN("Heating Mode: "); GP.SWITCH("sw_tempmode", mydata.sw_tempmode));
             } 
         GP.PLAIN("Enable:");GP.SWITCH("sw_temp", mydata.sw_temp););
@@ -34,7 +34,7 @@ void build() {
       GP_MAKE_BLOCK_THIN_TAB(
         "Humidity Control %",
         if (mydata.sw_humidity) {
-            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("humidity", mydata.humidity, 40, 90, 1, 0, GP_GREEN, "60pix" )); 
+            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("set_humidity", mydata.set_humidity, 40, 90, 1, 0, GP_GREEN, "60pix" )); 
             GP_MAKE_BOX(GP.PLAIN("Hysteresis %:  "); GP.SPINNER("humidity_hys", mydata.humidity_hys, 0, 10, 1, 0, GP_GREEN, "60pix" ));
             } 
         GP.PLAIN("Enable:"); GP.SWITCH("sw_humidity", mydata.sw_humidity);
@@ -121,7 +121,7 @@ void build() {
     //все обновляющиеся параметры на WEB странице надо указать тут
     GP_MAKE_BLOCK_THIN_TAB(
         "Calibration Offsets",
-        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", mydata.tempOffset, -10, 10, 0.5, 1, GP_GREEN, "60pix"));
+        GP_MAKE_BOX(GP.PLAIN("Temp. Offset °C");GP.SPINNER("tempOffset", mydata.tempOffset, -10, 10, 1, 1, GP_GREEN, "60pix"));
         GP_MAKE_BOX(GP.PLAIN("Humidity Offset %"); GP.SPINNER("humidityOffset", mydata.humidityOffset, 0, 20, 1, 0, GP_GREEN, "60pix"));
 
       );

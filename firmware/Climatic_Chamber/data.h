@@ -28,10 +28,10 @@
 
 
 //#define Debug
-float rowtemperature = 0.0; //temperature from sensor
-float rowhumidity = 0.0;    //humidity from sensor
-float temperature = 0.0;   //calibrated temperature
-float humidity = 0.0;      //calibrated humidity
+int16_t rowtemperature; //temperature from sensor
+int16_t rowhumidity;    //humidity from sensor
+int16_t temperature;   //calibrated temperature
+int16_t humidity;      //calibrated humidity
 
 
 //**********Libraries*****************
@@ -65,9 +65,9 @@ struct Data {
   char staSsid[21] = STA_DEFAULT_SSID;  // Имя сети для STA режима по умолчанию
   char staPass[21] = STA_DEFAULT_PASS;  // Пароль сети для STA режима по умолчанию
   int gmt = 2;
-  float temp = 10.0;
-  float temp_hys = 0.0;
-  int16_t humidity = 70;
+  int temp = 10.0;
+  int temp_hys = 0.0;
+  int16_t set_humidity = 70;
   int humidity_hys = 0;
   int16_t drainage = 70;
   int drainage_hys = 0;
@@ -85,7 +85,7 @@ struct Data {
   int16_t venta_work_time = 2;
   int16_t quartz_Hours = 2;
   int16_t quartz_work_time = 2;
-  float tempOffset = 0.0;
+  int16_t tempOffset = 0.0;
   int16_t humidityOffset = 0;
   
   bool dependbyTempr;

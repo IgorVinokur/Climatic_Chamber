@@ -17,9 +17,9 @@ void action() {
   if (ui.form()) {
     if (ui.form("/cfg")) {
       data.update();
-      ui.copyFloat("temp", mydata.temp);
-      ui.copyFloat("temp_hys", mydata.temp_hys);
-      ui.copyInt("humidity", mydata.humidity);
+      ui.copyInt("temp", mydata.temp);
+      ui.copyInt("temp_hys", mydata.temp_hys);
+      ui.copyInt("set_humidity", mydata.set_humidity);
       ui.copyInt("humidity_hys", mydata.humidity_hys);
       ui.copyInt("drainage", mydata.drainage);
       ui.copyInt("drainage_hys", mydata.drainage_hys);
@@ -96,7 +96,7 @@ void action() {
     if (ui.clickInt("minTempr", mydata.minTempr)) {
       data.update();
     }
-    if (ui.clickFloat("tempOffset", mydata.tempOffset)) {
+    if (ui.clickInt("tempOffset", mydata.tempOffset)) {
       data.update();
     }
       if (ui.clickInt("humidityOffset", mydata.humidityOffset)) {

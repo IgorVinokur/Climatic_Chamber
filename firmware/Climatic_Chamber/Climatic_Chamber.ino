@@ -57,9 +57,11 @@ void loop() {
     // если разрешено, включаем по времени нагрузку ( свет или насос)
     if (mainDisplay){
       if (ntp.synced()){
-      tft.fillRect(200, 10, 50, 10, ST77XX_BLACK);
+
+      tft.fillRect(200, 10, 270, 15, ST77XX_BLACK);
       tft.setTextColor(ST77XX_WHITE);
-      tft.setCursor(200, 10);
+      tft.setTextSize(2);
+      tft.setCursor(220, 10);
       tft.println(ntp.timeString());
     }   //Serial.println(ntp.timeString());
     }
