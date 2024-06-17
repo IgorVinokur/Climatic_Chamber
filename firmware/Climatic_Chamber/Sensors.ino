@@ -18,8 +18,7 @@ void bme280Init() {
 
 // считываем температуру, влажность
 void bme280Read() {
-  float previusTemp;
-  float previusHum;
+  
   rowtemperature = (int) bme.readTemperature();
   rowhumidity = (int) bme.readHumidity();
   temperature = rowtemperature + mydata.tempOffset;
@@ -44,34 +43,9 @@ void bme280Read() {
   #endif
 
   if (mainDisplay){
-    
-    tft.setTextColor(ST77XX_BLACK);
-    tft.setCursor(235, 72);
-    tft.setTextSize(3);
-    //tft.printf("%.2fC", previusTemp);
-    tft.println(String(previusTemp));
-    tft.setCursor(240, 140);
-    //tft.printf("%.1f%%", previusHum);
-    tft.println(String(previusHum));
-    tft.setTextColor(ST77XX_WHITE);
-    tft.setTextSize(3);
-    tft.setCursor(230, 35);
-    tft.println("Temp");
-    tft.setCursor(235, 72);
-    //tft.printf("%.2fC", temperature);
-    //tft.setTextSize(2);
-    previusTemp = temperature;
-    previusHum = humidity;
-    tft.println(String(temperature) + "C");
-    tft.setCursor(235, 110);
-    tft.setTextSize(3);
-    tft.println("Hum");
-    tft.setCursor(240, 140);
-    //tft.printf("%.1f%%", humidity);
-    //tft.setTextSize(3);
-    tft.println(String(humidity) + "%");
-    
-
+     sensorsDisplay();
   }
+
+  
     //tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
 } //bme280Read()
