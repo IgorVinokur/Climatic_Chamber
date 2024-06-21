@@ -23,23 +23,12 @@ void bme280Read() {
   rowhumidity = (int) bme.readHumidity();
   temperature = rowtemperature + mydata.tempOffset;
   humidity = rowhumidity + mydata.humidityOffset;
+#ifdef Debug
   Serial.print("Temperature = ");
   Serial.println(temperature);
   Serial.print("Humidity = ");
   Serial.println(humidity);
-  #ifdef Debug
-  Serial.print("Temperature = ");
-  Serial.print(bme.readTemperature());
-  Serial.println(" °C");
-  Serial.print("Humidity = ");
-  Serial.print(bme.readHumidity());
-  Serial.println(" %");
-  //    Serial.print("Pressure = ");
-  //    Serial.print(bme.readPressure() / 100.0F);
-  //    Serial.println(" hPa");
-  //    Serial.print("Approx. Altitude = ");
-  //    Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-  //    Serial.println(" m");
+  
   #endif
 
   if (mainDisplay){
@@ -49,3 +38,6 @@ void bme280Read() {
   
     //tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
 } //bme280Read()
+
+//Encoder
+

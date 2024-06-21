@@ -4,17 +4,6 @@ void setup() {
 
   startup();
  
-  
-
-  ntp.begin();
-  ntp.setGMT(mydata.gmt);         // часовой пояс. Для Москвы: 3
- byte count = 0;
-  while (!ntp.synced()) {
-    ntp.updateNow();
-    delay(1000);
-    if (++count > 10) break;
-  }
-
   bme280Init();
   //EEPROM.begin(100);     // выделить память (больше или равно размеру структуры данных)
   //eemem.begin(0, 'e');  // изменить букву в скобках на другую, чтобы восстановить настройки по умолчанию
@@ -38,10 +27,9 @@ void loop() {
   data.tick(); 
   ui.tick();
   ntp.tick();
-  enc.tick();
+  eb.tick();
   temprelay();
 
-  //buildDisplay();
   
 
   // раз в 1 сек делаем дела
@@ -62,4 +50,19 @@ void loop() {
     }   //Serial.println(ntp.timeString());
     }
   }
+
+  
+// обработка поворота раздельная
+    if (eb.left()) Serial.println("left");
+    if (eb.right()) Serial.println("right");
+    if (eb.leftH()) Serial.println("leftH");
+    if (eb.rightH()) Serial.println("rightH");
+
+    // кнопка
+    if (eb.press()) Serial.println("press");
+    if (eb.click()) Serial.println("click");
+    if (eb.hold()) Serial.println("hold");
+    if (eb.hold(3)) Serial.println("hold 3");
+    if (eb.hasClicks(3)) Serial.println("has 3 clicks");
+
 }  //loop()

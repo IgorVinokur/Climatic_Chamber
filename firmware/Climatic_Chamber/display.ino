@@ -26,8 +26,10 @@ void MainDisplay() {
   tft.drawLine(220, 100, 320, 100, ST77XX_GREEN);
   if (WiFi.getMode() == WIFI_AP){
     tft.drawBitmap(5, 8, nowireless, 20, 20, ST77XX_RED);
+    tft.drawBitmap(40, 8, nocloud, 20, 20, ST77XX_RED);
     } else {
       tft.drawBitmap(5, 8, wireless, 20, 20, ST77XX_GREEN);
+      tft.drawBitmap(40, 8, cloud, 20, 20, ST77XX_BLUE);
     }
 
   
