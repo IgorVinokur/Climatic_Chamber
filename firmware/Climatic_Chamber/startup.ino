@@ -1,32 +1,34 @@
 #define CONNECT_TIMEOUT 10000
 
 void startup() {
- // EEPROM.begin(eemem.blockSize());
- // eemem.begin(0, 'b');  // изменить букву в скобках на другую, чтобы восстановить настройки по умолчанию
+  // EEPROM.begin(eemem.blockSize());
+  // eemem.begin(0, 'b');  // изменить букву в скобках на другую, чтобы восстановить настройки по умолчанию
 
   Serial.begin(115200);
-  while (!LittleFS.begin()) {           // Инициализация файловой системы
+
+    while (!LittleFS.begin()) {  // Инициализация файловой системы
     LittleFS.format();
   }
-
-
   if (!LittleFS.begin()) Serial.println("FS Error");
-
-
   // прочитать данные из файла в переменную
   // при первом запуске в файл запишутся данные из структуры
   FDstat_t stat = data.read();
 
   switch (stat) {
-    case FD_FS_ERR: Serial.println("FS Error");
+    case FD_FS_ERR:
+      Serial.println("FS Error");
       break;
-    case FD_FILE_ERR: Serial.println("Error");
+    case FD_FILE_ERR:
+      Serial.println("Error");
       break;
-    case FD_WRITE: Serial.println("Data Write");
+    case FD_WRITE:
+      Serial.println("Data Write");
       break;
-    case FD_ADD: Serial.println("Data Add");
+    case FD_ADD:
+      Serial.println("Data Add");
       break;
-    case FD_READ: Serial.println("Data Read");
+    case FD_READ:
+      Serial.println("Data Read");
       break;
     default:
       break;
@@ -45,8 +47,6 @@ void startup() {
       fail = 1;
       break;
     }
-  
- 
     Serial.print(".");
     delay(500);
   }
@@ -63,27 +63,39 @@ void startup() {
 
   temp_relay_heating.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
   temp_relay_heating.hysteresis = mydata.temp_hys;  // ширина гистерезиса
-  temp_relay_heating.k = 0.5;                          // коэффициент обратной связи (подбирается по факту)
+  temp_relay_heating.k = 0.5;                       // коэффициент обратной связи (подбирается по факту)
   temp_relay_cooling.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
   temp_relay_cooling.hysteresis = mydata.temp_hys;  // ширина гистерезиса
-  temp_relay_cooling.k = 0.5;                          // коэффициент обратной связи (подбирается по факту)
+  temp_relay_cooling.k = 0.5;                       // коэффициент обратной связи (подбирается по факту)
 
-//Display Init
+  //Display Init
   displayInit();
 
   //Encoder Settings
-  enc.setBtnLevel(LOW);
-  enc.setClickTimeout(500);
-  enc.setDebTimeout(50);
-  enc.setHoldTimeout(600);
-  enc.setStepTimeout(200);
+  eb.setBtnLevel(LOW);
+  eb.setClickTimeout(500);
+  eb.setDebTimeout(50);
+  eb.setHoldTimeout(600);
+  eb.setStepTimeout(200);
 
-  enc.setEncReverse(0);
-  enc.setEncType(EB_STEP4_LOW);
-  enc.setFastTimeout(30);
+  eb.setEncReverse(0);
+  eb.setEncType(EB_STEP4_LOW);
+  eb.setFastTimeout(30);
+
+  // сбросить счётчик энкодера
+  eb.counter = 0;
 
   ui.start("cl-chamber");
   ui.attachBuild(build);
   ui.attach(action);
   ui.enableOTA();
+
+  ntp.begin();
+  ntp.setGMT(mydata.gmt);  // часовой пояс. Для Москвы: 3
+  byte count = 0;
+  while (!ntp.synced()) {
+    ntp.updateNow();
+    delay(1000);
+    if (++count > 10) break;
+  }
 }
