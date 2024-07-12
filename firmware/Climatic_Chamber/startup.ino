@@ -72,18 +72,18 @@ void startup() {
   displayInit();
 
   //Encoder Settings
-  eb.setBtnLevel(LOW);
-  eb.setClickTimeout(500);
-  eb.setDebTimeout(50);
-  eb.setHoldTimeout(600);
-  eb.setStepTimeout(200);
+  enc.setBtnLevel(LOW);
+  enc.setClickTimeout(500);
+  enc.setDebTimeout(50);
+  enc.setHoldTimeout(600);
+  enc.setStepTimeout(200);
 
-  eb.setEncReverse(0);
-  eb.setEncType(EB_STEP4_LOW);
-  eb.setFastTimeout(30);
+  enc.setEncReverse(0);
+  enc.setEncType(EB_STEP4_LOW);
+  enc.setFastTimeout(30);
 
   // сбросить счётчик энкодера
-  eb.counter = 0;
+  enc.counter = 0;
 
   ui.start("cl-chamber");
   ui.attachBuild(build);

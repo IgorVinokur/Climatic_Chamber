@@ -40,6 +40,12 @@ void action() {
       ui.copyStr("pass", mydata.staPass);
       ui.copyStr("ap_ssid", mydata.apSsid);
       ui.copyStr("ap_pass", mydata.apPass);
+      ui.copyStr("mqttServer", mydata.mqttServer);
+      ui.copyInt("mqttPort", mydata.mqttPort);
+      ui.copyStr("mqttUser", mydata.mqttUser);
+      ui.copyStr("mqttPwd", mydata.mqttPwd);
+      ui.copyStr("mqttTopic", mydata.mqttTopic);
+
       ui.copyInt("gmt", mydata.gmt);
      if (strlen(mydata.apSsid) < 1)  strcpy(mydata.apSsid, AP_DEFAULT_SSID);   // Check if AP name is not empty
      if (strlen(mydata.apPass) < 8)  strcpy(mydata.apPass, AP_DEFAULT_PASS);   // Check if Password AP is not empty or low than 8 characters
@@ -87,6 +93,9 @@ void action() {
       data.update();
     }
     if (ui.clickBool("sw_q_lamp", mydata.sw_q_lamp)) {
+      data.update();
+    }
+    if (ui.clickBool("sw_mqtt", mydata.sw_mqtt)) {
       data.update();
     }
 
