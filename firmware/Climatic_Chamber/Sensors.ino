@@ -31,7 +31,7 @@ void bme280Read() {
   
   #endif
 
-  if (mainDisplay){
+  if (currentScreen == MAIN){
      sensorsDisplay();
   }
 

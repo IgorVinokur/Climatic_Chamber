@@ -6,7 +6,7 @@ void build() {
 
   GP.PAGE_TITLE("Climatic Chamber Controller");
   //GP.ONLINE_CHECK();
-  GP.UPDATE("nowDate,nowTime,startTime,stopTime,tempr,humid,releIndikator,sw_temp_enable,sw_humidity_enable,temp,temp_hys,tempmode_enable");
+  GP.UPDATE("nowDate,nowTime,startTime,stopTime,releIndikator,sw_temp,sw_humidity,temp,temp_hys,sw_tempmode");
   GP.TITLE("Climatic Chamber Controller", "t1");
   
   GP.HR();
@@ -19,7 +19,8 @@ void build() {
 
     GP_MAKE_FORM(
       "/cfg", "SAVE",
-      GP.RELOAD_CLICK("sw_temp,sw_humidity,sw_drainage,sw_a_circulation,sw_ventilation,sw_q_lamp"); 
+      GP.RELOAD_CLICK("sw_temp,mydata.sw_humidity,sw_drainage,sw_a_circulation,sw_ventilation,sw_q_lamp,sw_mqtt"); 
+      GP.UPDATE("mydata.sw_temp");
       GP_MAKE_GRID(
       GP_MAKE_BLOCK_THIN_TAB(
         "Temperature Control °С",
@@ -90,6 +91,7 @@ void build() {
 
     GP_MAKE_FORM(
       "/setup", "SAVE",
+      GP.RELOAD_CLICK("sw_mqtt"); 
       GP_MAKE_BLOCK_TAB(
         "Set TimeZone",
         GP_MAKE_BOX(GP.LABEL("GMT"); GP.NUMBER("gmt", "GMT", mydata.gmt)););
@@ -100,18 +102,23 @@ void build() {
         GP_MAKE_BOX(GP.LABEL("Pass: "); GP.PASS_EYE("pass", "Password", mydata.staPass));
         GP_MAKE_BOX(GP.LABEL("AP SSID: "); GP.TEXT("ap_ssid", "AP SSID", mydata.apSsid));
         GP_MAKE_BOX(GP.LABEL("AP Pass: "); GP.TEXT("ap_pass", "AP Password", mydata.apPass));
-        ););
+        );
 
+      GP_MAKE_BLOCK_TAB(
+        "MQTT Settings",
+         if (mydata.sw_mqtt) {
+        GP_MAKE_BOX(GP.LABEL("MQTT Server: "); GP.TEXT("mqttServer", "MQTT Server", mydata.mqttServer));
+        GP_MAKE_BOX(GP.LABEL("MQTT Port:"); GP.NUMBER("mqttPort", "MQTT Port 1883", mydata.mqttPort));
+        GP_MAKE_BOX(GP.LABEL("MQTT UserName:"); GP.TEXT("mqttUser", "MQTT User", mydata.mqttUser));
+        GP_MAKE_BOX(GP.LABEL("MQTT Password:"); GP.PASS_EYE("mqttPwd", "MQTT Password", mydata.mqttPwd));
+        GP_MAKE_BOX(GP.LABEL("MQTT topic: "); GP.TEXT("mqttTopic", "MQTT Topic", mydata.mqttTopic));
 
-    GP_MAKE_BLOCK_THIN_TAB(
-      "File Manager",
-      GP.LABEL("File/Files/Fldr");
-      GP_MAKE_BOX(
-        GP_CENTER,
-        GP.FILE_UPLOAD("");
-        GP.FILE_UPLOAD("");
-        GP.FOLDER_UPLOAD("");););
+         }
+        GP.PLAIN("Enable:"); GP.SWITCH("sw_mqtt", mydata.sw_mqtt);
+      ););
+      
 
+    
     GP_MAKE_BLOCK_THIN_TAB(
       "OTA Firmware",
       GP_MAKE_BOX(
