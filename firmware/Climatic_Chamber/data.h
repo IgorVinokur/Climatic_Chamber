@@ -71,11 +71,11 @@ struct Data {
   int temp_hys = 0.0;
   int16_t set_humidity = 70;
   int humidity_hys = 0;
-  int16_t drainage = 70;
-  int drainage_hys = 0;
+  int16_t set_draining = 80;
+  int draining_hys = 0;
   bool sw_temp;
   bool sw_humidity;
-  bool sw_drainage;
+  bool sw_draining;
   bool sw_a_circulation;
   bool sw_ventilation;
   bool sw_q_lamp;
@@ -86,9 +86,9 @@ struct Data {
   char mqttPwd[21] = "";
   char mqttTopic[51] = "";
   int mqttPort = 1883;
-  float fan_pwr = 100;
-  int16_t air_circulation_Hours = 2;
-  int16_t circulation_work_time = 2;
+  int16_t air_circulation_fan_pwr = 100;
+  int16_t air_circulation_Period = 2;
+  int16_t air_circulation_Duration = 2;
   int16_t venta_Hours = 2;
   int16_t venta_work_time = 2;
   int16_t quartz_Hours = 2;
@@ -120,19 +120,23 @@ enum Screen { MAIN,
               TEMP_OFFSET,
               HUMIDITY_OFFSET,
               TEMP_CONTROL,
-              HUM_CONTROL };
+              HUM_CONTROL,
+              DRAIN_CONTROL,
+              A_CIRCUL_CONTROL };
 Screen currentScreen = MAIN;
 bool mainDisplay = 0;
 int selectedMenuItem = 0;
 int selectedSubMenuItem = 0;
 int selectedTempControlItem = 0;
 int selectedHumControlItem = 0;
+int selectedDrainControlItem = 0;
+int selectedACirculControlItem = 0;
 int topMenuItem = 0;
 int topSubMenuItem = 0;
 int position = 0;
 const int itemsPerPage = 4;
 unsigned long lastInteractionTime = 0;
-const unsigned long timeoutDuration = 10000;  // 10 seconds
+const unsigned long timeoutDuration = 30000;  //Menu unuse Timeout  30 seconds
 //****** End Display Variables*******
 
 

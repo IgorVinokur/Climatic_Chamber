@@ -8,11 +8,15 @@ void action() {
     ui.updateTime("stopTime", mydata.stopTime);
     ui.updateInt("tempr", temperature);
     ui.updateInt("humid", humidity);
-
-    
+        
   }  //ui.update()
   // был клик по компоненту внутри веб странички
   
+  if (ui.updateFloat("sw_temp", mydata.sw_temp)){
+     data.update();
+  }
+
+
   // ================== CONFIG ==================
   if (ui.form()) {
     if (ui.form("/cfg")) {
@@ -21,11 +25,11 @@ void action() {
       ui.copyInt("temp_hys", mydata.temp_hys);
       ui.copyInt("set_humidity", mydata.set_humidity);
       ui.copyInt("humidity_hys", mydata.humidity_hys);
-      ui.copyInt("drainage", mydata.drainage);
-      ui.copyInt("drainage_hys", mydata.drainage_hys);
-      ui.copyInt("air_circulation_Hours", mydata.air_circulation_Hours);
-      ui.copyInt("circulation_work_time", mydata.circulation_work_time);
-      ui.copyFloat("fan_pwr", mydata.fan_pwr);
+      ui.copyInt("set_draining", mydata.set_draining);
+      ui.copyInt("draining_hys", mydata.draining_hys);
+      ui.copyInt("air_circulation_Period", mydata.air_circulation_Period);
+      ui.copyInt("air_circulation_Duration", mydata.air_circulation_Duration);
+      ui.copyFloat("air_circulation_fan_pwr", mydata.air_circulation_fan_pwr);
       ui.copyInt("venta_Hours", mydata.venta_Hours);
       ui.copyInt("venta_work_time", mydata.venta_work_time);
       ui.copyInt("quartz_Hours", mydata.quartz_Hours);
@@ -83,7 +87,7 @@ void action() {
     if (ui.clickBool("sw_humidity", mydata.sw_humidity)) {
       data.update();
     }
-    if (ui.clickBool("sw_drainage", mydata.sw_drainage)) {
+    if (ui.clickBool("sw_draining", mydata.sw_draining)) {
       data.update();
     }
     if (ui.clickBool("sw_a_circulation", mydata.sw_a_circulation)) {
