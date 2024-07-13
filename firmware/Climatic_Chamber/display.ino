@@ -69,10 +69,10 @@ void sensorsDisplay() {
 void displayMenuScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
-  tft.setTextColor(ST77XX_WHITE);
+  tft.setTextColor(ST77XX_YELLOW);
   tft.setTextSize(2);
-  tft.print("Menu");
-
+  tft.print("** Menu **");
+  tft.setTextColor(ST77XX_WHITE);
   const char* menuItems[] = { "Configuration", "Setup", "Info", "Back" };
   for (int i = topMenuItem; i < min(topMenuItem + itemsPerPage, 4); i++) {
     tft.setCursor(10, 40 + ((i - topMenuItem) * 30));
@@ -85,31 +85,14 @@ void displayMenuScreen() {
   }
 }
 
-void displaySubMenuScreen() {
-  tft.fillScreen(ST77XX_BLACK);
-  tft.setCursor(10, 10);
-  tft.setTextColor(ST77XX_WHITE);
-  tft.setTextSize(2);
-  tft.print("Setup");
-
-  const char* subMenuItems[] = { "Param 1", "Param 2", "Param 3", "Param 4", "Back" };
-  for (int i = 0; i < 5; i++) {
-    tft.setCursor(10, 40 + (i * 30));
-    if (i == selectedSubMenuItem) {
-      tft.setTextColor(ST77XX_RED);
-    } else {
-      tft.setTextColor(ST77XX_WHITE);
-    }
-    tft.print(subMenuItems[i]);
-  }
-}
 
 void displaySetupScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
-  tft.setTextColor(ST77XX_WHITE);
+  tft.setTextColor(ST77XX_YELLOW);
   tft.setTextSize(2);
-  tft.print("Setup");
+  tft.print("** Setup **");
+  tft.setTextColor(ST77XX_WHITE);
 
   const char* setupItems[] = { "Temp. Offset", "Hum. Offset", "Restart", "Back" };
   for (int i = topSubMenuItem; i < min(topSubMenuItem + itemsPerPage, 4); i++) {
@@ -126,12 +109,13 @@ void displaySetupScreen() {
 void displayConfigurationScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
-  tft.setTextColor(ST77XX_WHITE);
+  tft.setTextColor(ST77XX_YELLOW);
   tft.setTextSize(2);
-  tft.print("Configuration");
+  tft.print("** Configuration **");
+  tft.setTextColor(ST77XX_WHITE);
 
-  const char* configItems[] = { "Temperature Control", "Humidity Control", "Drainage", "Ventilation", "Quartz Lamp", "Back" };
-  for (int i = topSubMenuItem; i < min(topSubMenuItem + itemsPerPage, 6); i++) {
+  const char* configItems[] = { "Temperature Control", "Humidity Control", "Draining", "Air Circulation", "Ventilation", "Quartz Lamp", "Back" };
+  for (int i = topSubMenuItem; i < min(topSubMenuItem + itemsPerPage, 7); i++) {
     tft.setCursor(10, 40 + ((i - topSubMenuItem) * 30));
     if (i == selectedSubMenuItem) {
       tft.setTextColor(ST77XX_RED);
@@ -142,24 +126,7 @@ void displayConfigurationScreen() {
   }
 }
 
-void displayInfoScreen() {
-  tft.fillScreen(ST77XX_BLACK);
-  tft.setCursor(10, 10);
-  tft.setTextColor(ST77XX_WHITE);
-  tft.setTextSize(2);
-  tft.print("Setup");
 
-  const char* subMenuItems[] = { "Version", "IP:", "Param3", "Param 4", "Back" };
-  for (int i = 0; i < 5; i++) {
-    tft.setCursor(10, 40 + (i * 30));
-    if (i == selectedSubMenuItem) {
-      tft.setTextColor(ST77XX_RED);
-    } else {
-      tft.setTextColor(ST77XX_WHITE);
-    }
-    tft.print(subMenuItems[i]);
-  }
-}
 
 void displayTempOffsetScreen() {
   tft.fillScreen(ST77XX_BLACK);
@@ -214,7 +181,7 @@ void displayTempControlScreen() {
     } else if (i == 2) {
       tft.print(mydata.temp_hys);
     } else if (i == 3) {
-      tft.print(mydata.sw_tempmode ? "Cooling" : "Heating");
+      tft.print(mydata.sw_tempmode ? "Heating" : "Cooling");
     }
   }
 }
@@ -244,5 +211,84 @@ void displayHumControlScreen() {
     } else if (i == 2) {
       tft.print(mydata.humidity_hys);
     }
+  }
+}
+
+void displayDrainingControlScreen() {
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(10, 10);
+  tft.setTextColor(ST77XX_YELLOW);
+  tft.setTextSize(2);
+  tft.print("** Draining Control **");
+
+  tft.setTextColor(ST77XX_WHITE);
+  const char* drainControlItems[] = { "Enable", "Set Draining", "Set Hysteresis" };
+  for (int i = 0; i < 3; i++) {
+    tft.setCursor(10, 40 + (i * 30));
+    if (i == selectedDrainControlItem) {
+      tft.setTextColor(ST77XX_RED);
+    } else {
+      tft.setTextColor(ST77XX_WHITE);
+    }
+    tft.print(drainControlItems[i]);
+    tft.print(": ");
+    if (i == 0) {
+      tft.print(mydata.sw_draining ? "ON" : "OFF");
+    } else if (i == 1) {
+      tft.print(mydata.set_draining);
+    } else if (i == 2) {
+      tft.print(mydata.draining_hys);
+    }
+  }
+}
+
+void displayACirculControlScreen() {
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(10, 10);
+  tft.setTextColor(ST77XX_YELLOW);
+  tft.setTextSize(2);
+  tft.print("*Air Circulation Control*");
+
+  tft.setTextColor(ST77XX_WHITE);
+  const char* a_circulControlItems[] = { "Enable", "Period Hrs.", "Duration Min.", "Fan Speed %" };
+  for (int i = 0; i < 4; i++) {
+    tft.setCursor(10, 40 + (i * 30));
+    if (i == selectedACirculControlItem) {
+      tft.setTextColor(ST77XX_RED);
+    } else {
+      tft.setTextColor(ST77XX_WHITE);
+    }
+    tft.print(a_circulControlItems[i]);
+    tft.print(": ");
+    if (i == 0) {
+      tft.print(mydata.sw_a_circulation ? "ON" : "OFF");
+    } else if (i == 1) {
+      tft.print(mydata.air_circulation_Period);
+    } else if (i == 2) {
+      tft.print(mydata.air_circulation_Duration);
+    }  else if (i == 3) {
+      tft.print(mydata.air_circulation_fan_pwr);
+    }
+  }
+}
+
+
+void displayInfoScreen() {
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(10, 10);
+  tft.setTextColor(ST77XX_YELLOW);
+  tft.setTextSize(2);
+  tft.print("** Information **");
+  tft.setTextColor(ST77XX_WHITE);
+
+  const char* subInfoItems[] = { "Version", "IP:", "Param3", "Param 4", "Back" };
+  for (int i = topSubMenuItem; i < min(topSubMenuItem + itemsPerPage, 5); i++) {
+    tft.setCursor(10, 40 + ((i - topSubMenuItem) * 30));
+    if (i == selectedSubMenuItem) {
+      tft.setTextColor(ST77XX_RED);
+    } else {
+      tft.setTextColor(ST77XX_WHITE);
+    }
+    tft.print(subInfoItems[i]);
   }
 }

@@ -191,6 +191,87 @@ void displayMenu() {
         displayConfigurationScreen();
       }
       break;
+    case DRAIN_CONTROL:
+      if (enc.left()) {
+        if (selectedDrainControlItem == 0) {
+          if (mydata.sw_draining) {
+            mydata.sw_draining = false;
+          } else {
+            mydata.sw_draining = true;
+          }
+        } else if (selectedDrainControlItem == 1) {
+          mydata.set_draining--;
+        } else if (selectedDrainControlItem == 2) {
+          mydata.draining_hys--;
+        }
+        displayDrainingControlScreen();
+      } else if (enc.right()) {
+        if (selectedDrainControlItem == 0) {
+          if (mydata.sw_draining) {
+            mydata.sw_draining = false;
+          } else {
+            mydata.sw_draining = true;
+          }
+        } else if (selectedDrainControlItem == 1) {
+          mydata.set_draining++;
+        } else if (selectedDrainControlItem == 2) {
+          mydata.draining_hys++;
+        }
+        displayDrainingControlScreen();
+      } else if (enc.click()) {
+        selectedDrainControlItem++;
+        if (selectedDrainControlItem > 2) {
+          selectedDrainControlItem = 0;
+        }
+        displayDrainingControlScreen();
+      } else if (enc.hold()) {
+        currentScreen = CONFIGURATION;
+        displayConfigurationScreen();
+      }
+      break;
+    
+    case A_CIRCUL_CONTROL:
+      if (enc.left()) {
+        if (selectedACirculControlItem == 0) {
+          if (mydata.sw_a_circulation) {
+            mydata.sw_a_circulation = false;
+          } else {
+            mydata.sw_a_circulation = true;
+          }
+        } else if (selectedACirculControlItem == 1) {
+          mydata.air_circulation_Period = constrain(mydata.air_circulation_Period - 1, 0, 24);
+        } else if (selectedACirculControlItem == 2) {
+          mydata.air_circulation_Duration = constrain(mydata.air_circulation_Duration - 1, 0, 60);
+        } else if (selectedACirculControlItem == 3) {
+          mydata.air_circulation_fan_pwr = constrain(mydata.air_circulation_fan_pwr - 10, 0, 100);
+        }
+        displayACirculControlScreen();
+      } else if (enc.right()) {
+        if (selectedACirculControlItem == 0) {
+          if (mydata.sw_a_circulation) {
+            mydata.sw_a_circulation = false;
+          } else {
+            mydata.sw_a_circulation = true;
+          }
+        } else if (selectedACirculControlItem == 1) {
+          mydata.air_circulation_Period = constrain(mydata.air_circulation_Period + 1, 0, 24);
+        } else if (selectedACirculControlItem == 2) {
+          mydata.air_circulation_Duration = constrain(mydata.air_circulation_Duration + 1, 0, 60);
+        } else if (selectedACirculControlItem == 3) {
+          mydata.air_circulation_fan_pwr = constrain(mydata.air_circulation_fan_pwr + 10, 0, 100);
+        }
+        displayACirculControlScreen();
+      } else if (enc.click()) {
+        selectedACirculControlItem++;
+        if (selectedACirculControlItem > 3) {
+          selectedACirculControlItem = 0;
+        }
+        displayACirculControlScreen();
+      } else if (enc.hold()) {
+        currentScreen = CONFIGURATION;
+        displayConfigurationScreen();
+      }
+      break;
 
     case HUMIDITY_OFFSET:
       if (enc.left()) {
@@ -204,8 +285,6 @@ void displayMenu() {
         displaySetupScreen();
       }
       break;
-
-
 
     case CONFIGURATION:
       if (enc.left()) {
@@ -238,6 +317,12 @@ void displayMenu() {
         } else if (selectedSubMenuItem == 1) {  // If "Temperature Control" is selected
           currentScreen = HUM_CONTROL;
           displayHumControlScreen();
+        } else if (selectedSubMenuItem == 2) {  // If "Temperature Control" is selected
+          currentScreen = DRAIN_CONTROL;
+          displayDrainingControlScreen();
+        }else if (selectedSubMenuItem == 3) {  // If "Temperature Control" is selected
+          currentScreen = A_CIRCUL_CONTROL;
+          displayACirculControlScreen();
         }
         // Add specific actions for each configuration item if needed
       } else if (enc.hold()) {
