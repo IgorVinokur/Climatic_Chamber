@@ -86,9 +86,9 @@ struct Data {
   char mqttPwd[21] = "";
   char mqttTopic[51] = "";
   int mqttPort = 1883;
-  int16_t air_circulation_fan_pwr = 100;
-  int16_t air_circulation_Period = 2;
-  int16_t air_circulation_Duration = 2;
+  int16_t air_circ_fan_pwr = 100;
+  int16_t air_circ_Period = 2;
+  int16_t air_circ_Duration = 2;
   int16_t venta_Hours = 2;
   int16_t venta_work_time = 2;
   int16_t quartz_Hours = 2;

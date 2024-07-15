@@ -51,9 +51,9 @@ void build() {
         GP_MAKE_BLOCK_THIN_TAB(
           "Air Circulation",
           if (mydata.sw_a_circulation) {
-            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("air_circulation_Period", mydata.air_circulation_Period, 1, 24, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("air_circulation_Duration", mydata.air_circulation_Duration, 1, 60, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Fan:"); GP.SLIDER("air_circulation_fan_pwr", mydata.air_circulation_fan_pwr, 0, 100, 1));
+            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("air_circ_Period", mydata.air_circ_Period, 1, 24, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("air_circ_Duration", mydata.air_circ_Duration, 1, 60, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Fan:"); GP.SLIDER("air_circ_fan_pwr", mydata.air_circ_fan_pwr, 0, 100, 1));
           } GP.PLAIN("Enable:");
           GP.SWITCH("sw_a_circulation", mydata.sw_a_circulation);););
 

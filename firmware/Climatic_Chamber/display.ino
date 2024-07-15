@@ -263,11 +263,11 @@ void displayACirculControlScreen() {
     if (i == 0) {
       tft.print(mydata.sw_a_circulation ? "ON" : "OFF");
     } else if (i == 1) {
-      tft.print(mydata.air_circulation_Period);
+      tft.print(mydata.air_circ_Period);
     } else if (i == 2) {
-      tft.print(mydata.air_circulation_Duration);
+      tft.print(mydata.air_circ_Duration);
     }  else if (i == 3) {
-      tft.print(mydata.air_circulation_fan_pwr);
+      tft.print(mydata.air_circ_fan_pwr);
     }
   }
 }

@@ -12,11 +12,6 @@ void action() {
   }  //ui.update()
   // был клик по компоненту внутри веб странички
   
-  if (ui.updateFloat("sw_temp", mydata.sw_temp)){
-     data.update();
-  }
-
-
   // ================== CONFIG ==================
   if (ui.form()) {
     if (ui.form("/cfg")) {
@@ -27,9 +22,9 @@ void action() {
       ui.copyInt("humidity_hys", mydata.humidity_hys);
       ui.copyInt("set_draining", mydata.set_draining);
       ui.copyInt("draining_hys", mydata.draining_hys);
-      ui.copyInt("air_circulation_Period", mydata.air_circulation_Period);
-      ui.copyInt("air_circulation_Duration", mydata.air_circulation_Duration);
-      ui.copyFloat("air_circulation_fan_pwr", mydata.air_circulation_fan_pwr);
+      ui.copyInt("air_circ_Period", mydata.air_circ_Period);
+      ui.copyInt("air_circ_Duration", mydata.air_circ_Duration);
+      ui.copyInt("air_circ_fan_pwr", mydata.air_circ_fan_pwr);
       ui.copyInt("venta_Hours", mydata.venta_Hours);
       ui.copyInt("venta_work_time", mydata.venta_work_time);
       ui.copyInt("quartz_Hours", mydata.quartz_Hours);

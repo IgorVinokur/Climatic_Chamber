@@ -45,13 +45,16 @@ void displayMenu() {
         } else if (selectedMenuItem == 2) {
           currentScreen = INFO;
           displayInfoScreen();
-        } else if (selectedMenuItem == 3) {  // If the back button is selected
+        } else if (selectedMenuItem == 3 ) {  // If the back button is selected
           currentScreen = MAIN;
+          selectedSubMenuItem = 0;
+          data.update();
           displayMainScreen();
         }
       } else if (enc.hold()) {
         currentScreen = MAIN;
         selectedSubMenuItem = 0;
+        data.update();
         displayMainScreen();
       }
       break;
@@ -85,6 +88,7 @@ void displayMenu() {
       } else if (enc.hold()) {
         currentScreen = MENU;
         selectedSubMenuItem = 0;
+        data.update();
         displayMenuScreen();
       }
       break;
@@ -98,6 +102,7 @@ void displayMenu() {
         displayTempOffsetScreen();
       } else if (enc.click() || enc.hold()) {
         currentScreen = SETUP;
+        data.update();
         displaySetupScreen();
       }
       break;
@@ -107,8 +112,10 @@ void displayMenu() {
         if (selectedTempControlItem == 0) {
           if (mydata.sw_temp) {
             mydata.sw_temp = false;
+            
           } else {
             mydata.sw_temp = true;
+            
           }
         } else if (selectedTempControlItem == 1) {
           mydata.temp--;
@@ -148,6 +155,7 @@ void displayMenu() {
         }
         displayTempControlScreen();
       } else if (enc.hold()) {
+        data.update();
         currentScreen = CONFIGURATION;
         displayConfigurationScreen();
       }
@@ -183,10 +191,11 @@ void displayMenu() {
       } else if (enc.click()) {
         selectedHumControlItem++;
         if (selectedHumControlItem > 2) {
-          selectedHumControlItem = 0;
+            selectedHumControlItem = 0;
         }
         displayHumControlScreen();
       } else if (enc.hold()) {
+        data.update();
         currentScreen = CONFIGURATION;
         displayConfigurationScreen();
       }
@@ -225,6 +234,7 @@ void displayMenu() {
         }
         displayDrainingControlScreen();
       } else if (enc.hold()) {
+        data.update();
         currentScreen = CONFIGURATION;
         displayConfigurationScreen();
       }
@@ -239,11 +249,11 @@ void displayMenu() {
             mydata.sw_a_circulation = true;
           }
         } else if (selectedACirculControlItem == 1) {
-          mydata.air_circulation_Period = constrain(mydata.air_circulation_Period - 1, 0, 24);
+          mydata.air_circ_Period = constrain(mydata.air_circ_Period - 1, 0, 24);
         } else if (selectedACirculControlItem == 2) {
-          mydata.air_circulation_Duration = constrain(mydata.air_circulation_Duration - 1, 0, 60);
+          mydata.air_circ_Duration = constrain(mydata.air_circ_Duration - 1, 0, 60);
         } else if (selectedACirculControlItem == 3) {
-          mydata.air_circulation_fan_pwr = constrain(mydata.air_circulation_fan_pwr - 10, 0, 100);
+          mydata.air_circ_fan_pwr = constrain(mydata.air_circ_fan_pwr - 10, 0, 100);
         }
         displayACirculControlScreen();
       } else if (enc.right()) {
@@ -254,11 +264,11 @@ void displayMenu() {
             mydata.sw_a_circulation = true;
           }
         } else if (selectedACirculControlItem == 1) {
-          mydata.air_circulation_Period = constrain(mydata.air_circulation_Period + 1, 0, 24);
+          mydata.air_circ_Period = constrain(mydata.air_circ_Period + 1, 0, 24);
         } else if (selectedACirculControlItem == 2) {
-          mydata.air_circulation_Duration = constrain(mydata.air_circulation_Duration + 1, 0, 60);
+          mydata.air_circ_Duration = constrain(mydata.air_circ_Duration + 1, 0, 60);
         } else if (selectedACirculControlItem == 3) {
-          mydata.air_circulation_fan_pwr = constrain(mydata.air_circulation_fan_pwr + 10, 0, 100);
+          mydata.air_circ_fan_pwr = constrain(mydata.air_circ_fan_pwr + 10, 0, 100);
         }
         displayACirculControlScreen();
       } else if (enc.click()) {
@@ -269,6 +279,7 @@ void displayMenu() {
         displayACirculControlScreen();
       } else if (enc.hold()) {
         currentScreen = CONFIGURATION;
+        data.update();
         displayConfigurationScreen();
       }
       break;
@@ -282,6 +293,7 @@ void displayMenu() {
         displayHumOffsetScreen();
       } else if (enc.click() || enc.hold()) {
         currentScreen = SETUP;
+        data.update();
         displaySetupScreen();
       }
       break;
@@ -290,15 +302,15 @@ void displayMenu() {
       if (enc.left()) {
         selectedSubMenuItem--;
         if (selectedSubMenuItem < 0) {
-          selectedSubMenuItem = 5;                        // Wrap around to the last item
-          topSubMenuItem = max(0, 5 - itemsPerPage + 1);  // Adjust top item for wrap-around
+          selectedSubMenuItem = 6;                        // Wrap around to the last item
+          topSubMenuItem = max(0, 6 - itemsPerPage + 1);  // Adjust top item for wrap-around
         } else if (selectedSubMenuItem < topSubMenuItem) {
           topSubMenuItem = selectedSubMenuItem;
         }
         displayConfigurationScreen();
       } else if (enc.right()) {
         selectedSubMenuItem++;
-        if (selectedSubMenuItem > 5) {
+        if (selectedSubMenuItem > 6) {
           selectedSubMenuItem = 0;  // Wrap around to the first item
           topSubMenuItem = 0;       // Adjust top item for wrap-around
         } else if (selectedSubMenuItem >= topSubMenuItem + itemsPerPage) {
@@ -306,10 +318,11 @@ void displayMenu() {
         }
         displayConfigurationScreen();
       } else if (enc.click()) {
-        if (selectedSubMenuItem == 5) {  // If the back button is selected
+        if (selectedSubMenuItem == 6) {  // If the back button is selected
           currentScreen = MENU;
           selectedSubMenuItem = 0;
           topSubMenuItem = 0;
+          data.update();
           displayMenuScreen();
         } else if (selectedSubMenuItem == 0) {  // If "Temperature Control" is selected
           currentScreen = TEMP_CONTROL;
@@ -329,6 +342,7 @@ void displayMenu() {
         currentScreen = MENU;
         selectedSubMenuItem = 0;
         topSubMenuItem = 0;
+        data.update();
         displayMenuScreen();
       }
       break;
@@ -357,15 +371,17 @@ void displayMenu() {
           currentScreen = MENU;
           selectedSubMenuItem = 0;
           topSubMenuItem = 0;
+          data.update();
           displayMenuScreen();
         }
       } else if (enc.hold()) {
         currentScreen = MENU;
         selectedSubMenuItem = 0;
         topSubMenuItem = 0;
+        data.update();
         displayMenuScreen();
       }
       break;
   }
- 
+  
 }
