@@ -61,16 +61,16 @@ void build() {
         GP_MAKE_BLOCK_THIN_TAB(
           "Ventilation",
           if (mydata.sw_ventilation) {
-            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("venta_Hours", mydata.venta_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("venta_work_time", mydata.venta_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("venta_Period", mydata.venta_Period, 1, 24, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("venta_Duration", mydata.venta_Duration, 1, 60, 1, 0, GP_GREEN, "60pix"));
           } GP.PLAIN("Enable:");
           GP.SWITCH("sw_ventilation", mydata.sw_ventilation););
 
         GP_MAKE_BLOCK_THIN_TAB(
           "Quartz Lamp",
           if (mydata.sw_q_lamp) {
-            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("quartz_Hours", mydata.quartz_Hours, 1, 24, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("quartz_work_time", mydata.quartz_work_time, 1, 60, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Period Hrs:"); GP.SPINNER("quartz_Period", mydata.quartz_Period, 1, 24, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Duration Min:"); GP.SPINNER("quartz_work_time", mydata.quartz_Duration, 1, 60, 1, 0, GP_GREEN, "60pix"));
           } GP.PLAIN("Enable:");
           GP.SWITCH("sw_q_lamp", mydata.sw_q_lamp);););
 
