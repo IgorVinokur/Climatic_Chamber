@@ -86,6 +86,7 @@ void startup() {
   enc.counter = 0;
 
   ui.start("cl-chamber");
+  ui.onlineTimeout(3000); 
   ui.attachBuild(build);
   ui.attach(action);
   ui.enableOTA();

@@ -89,11 +89,11 @@ struct Data {
   int16_t air_circ_fan_pwr = 100;
   int16_t air_circ_Period = 2;
   int16_t air_circ_Duration = 2;
-  int16_t venta_Hours = 2;
-  int16_t venta_work_time = 2;
-  int16_t quartz_Hours = 2;
-  int16_t quartz_work_time = 2;
-  int16_t tempOffset = 0.0;
+  int16_t venta_Period = 2;
+  int16_t venta_Duration = 2;
+  int16_t quartz_Period = 2;
+  int16_t quartz_Duration = 2;
+  int16_t tempOffset = 0;
   int16_t humidityOffset = 0;
 
   bool dependbyTempr;
@@ -122,7 +122,9 @@ enum Screen { MAIN,
               TEMP_CONTROL,
               HUM_CONTROL,
               DRAIN_CONTROL,
-              A_CIRCUL_CONTROL };
+              A_CIRCUL_CONTROL,
+              VENTA_CONTROL,
+              QUARTZ_CONTROL };
 Screen currentScreen = MAIN;
 bool mainDisplay = 0;
 int selectedMenuItem = 0;
@@ -131,6 +133,8 @@ int selectedTempControlItem = 0;
 int selectedHumControlItem = 0;
 int selectedDrainControlItem = 0;
 int selectedACirculControlItem = 0;
+int selectedVentaControlItem = 0;
+int selectedQuartzControlItem = 0;
 int topMenuItem = 0;
 int topSubMenuItem = 0;
 int position = 0;

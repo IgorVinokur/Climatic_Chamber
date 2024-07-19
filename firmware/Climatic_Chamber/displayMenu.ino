@@ -95,10 +95,10 @@ void displayMenu() {
 
     case TEMP_OFFSET:
       if (enc.left()) {
-        mydata.tempOffset--;
+        mydata.tempOffset = constrain(mydata.tempOffset - 1, 0, 10);
         displayTempOffsetScreen();
       } else if (enc.right()) {
-        mydata.tempOffset++;
+        mydata.tempOffset = constrain(mydata.tempOffset + 1, 0, 10);
         displayTempOffsetScreen();
       } else if (enc.click() || enc.hold()) {
         currentScreen = SETUP;
@@ -118,9 +118,9 @@ void displayMenu() {
             
           }
         } else if (selectedTempControlItem == 1) {
-          mydata.temp--;
+          mydata.temp = constrain(mydata.temp - 1, 0, 35);
         } else if (selectedTempControlItem == 2) {
-          mydata.temp_hys--;
+          mydata.temp_hys = constrain(mydata.temp_hys - 1, 0, 10);
         } else if (selectedTempControlItem == 3) {
           if (mydata.sw_tempmode) {
             mydata.sw_tempmode = false;
@@ -137,9 +137,9 @@ void displayMenu() {
             mydata.sw_temp = true;
           }
         } else if (selectedTempControlItem == 1) {
-          mydata.temp++;
+          mydata.temp = constrain(mydata.temp + 1, 0, 35);
         } else if (selectedTempControlItem == 2) {
-          mydata.temp_hys++;
+          mydata.temp_hys = constrain(mydata.temp_hys + 1, 0, 10);
         } else if (selectedTempControlItem == 3) {
           if (mydata.sw_tempmode) {
             mydata.sw_tempmode = false;
@@ -170,9 +170,9 @@ void displayMenu() {
             mydata.sw_humidity = true;
           }
         } else if (selectedHumControlItem == 1) {
-          mydata.set_humidity--;
+          mydata.set_humidity = constrain(mydata.set_humidity - 5, 0, 100);
         } else if (selectedHumControlItem == 2) {
-          mydata.humidity_hys--;
+          mydata.humidity_hys = constrain(mydata.humidity_hys - 5, 0, 30);
         }
         displayHumControlScreen();
       } else if (enc.right()) {
@@ -183,9 +183,9 @@ void displayMenu() {
             mydata.sw_humidity = true;
           }
         } else if (selectedHumControlItem == 1) {
-          mydata.set_humidity++;
+          mydata.set_humidity = constrain(mydata.set_humidity + 5, 0, 100);
         } else if (selectedHumControlItem == 2) {
-          mydata.humidity_hys++;
+          mydata.humidity_hys = constrain(mydata.humidity_hys + 5, 0, 30);
         }
         displayHumControlScreen();
       } else if (enc.click()) {
@@ -209,9 +209,9 @@ void displayMenu() {
             mydata.sw_draining = true;
           }
         } else if (selectedDrainControlItem == 1) {
-          mydata.set_draining--;
+          mydata.set_draining = constrain(mydata.set_draining - 5, 0, 100);
         } else if (selectedDrainControlItem == 2) {
-          mydata.draining_hys--;
+          mydata.draining_hys = constrain(mydata.draining_hys - 5, 0, 30);
         }
         displayDrainingControlScreen();
       } else if (enc.right()) {
@@ -222,9 +222,9 @@ void displayMenu() {
             mydata.sw_draining = true;
           }
         } else if (selectedDrainControlItem == 1) {
-          mydata.set_draining++;
+          mydata.set_draining = constrain(mydata.set_draining + 5, 0, 100);
         } else if (selectedDrainControlItem == 2) {
-          mydata.draining_hys++;
+          mydata.draining_hys = constrain(mydata.draining_hys + 5, 0, 30);
         }
         displayDrainingControlScreen();
       } else if (enc.click()) {
@@ -233,6 +233,85 @@ void displayMenu() {
           selectedDrainControlItem = 0;
         }
         displayDrainingControlScreen();
+      } else if (enc.hold()) {
+        data.update();
+        currentScreen = CONFIGURATION;
+        displayConfigurationScreen();
+      }
+      break;
+    case VENTA_CONTROL:
+      if (enc.left()) {
+        if (selectedVentaControlItem == 0) {
+          if (mydata.sw_ventilation) {
+            mydata.sw_ventilation = false;
+          } else {
+            mydata.sw_ventilation = true;
+          }
+        } else if (selectedVentaControlItem == 1) {
+          mydata.venta_Period = constrain(mydata.venta_Period - 1, 0, 24);
+        } else if (selectedVentaControlItem == 2) {
+          mydata.venta_Duration = constrain(mydata.venta_Duration - 1, 0, 60);
+        }
+        displayVentaControlScreen();
+      } else if (enc.right()) {
+        if (selectedVentaControlItem == 0) {
+          if (mydata.sw_ventilation) {
+            mydata.sw_ventilation = false;
+          } else {
+            mydata.sw_ventilation = true;
+          }
+        } else if (selectedVentaControlItem == 1) {
+          mydata.venta_Period = constrain(mydata.venta_Period + 1, 0, 24);
+        } else if (selectedVentaControlItem == 2) {
+          mydata.venta_Duration = constrain(mydata.venta_Duration + 1, 0, 60);
+        }
+        displayVentaControlScreen();
+      } else if (enc.click()) {
+        selectedVentaControlItem++;
+        if (selectedVentaControlItem > 2) {
+          selectedVentaControlItem = 0;
+        }
+        displayVentaControlScreen();
+      } else if (enc.hold()) {
+        data.update();
+        currentScreen = CONFIGURATION;
+        displayConfigurationScreen();
+      }
+      break;
+
+    case QUARTZ_CONTROL:
+      if (enc.left()) {
+        if (selectedQuartzControlItem == 0) {
+          if (mydata.sw_q_lamp) {
+            mydata.sw_q_lamp = false;
+          } else {
+            mydata.sw_q_lamp = true;
+          }
+        } else if (selectedQuartzControlItem == 1) {
+          mydata.quartz_Period = constrain(mydata.quartz_Period - 1, 0, 24);
+        } else if (selectedQuartzControlItem == 2) {
+          mydata.quartz_Duration = constrain(mydata.quartz_Duration - 1, 0, 60);
+        }
+        displayQuartzControlScreen();
+      } else if (enc.right()) {
+        if (selectedQuartzControlItem == 0) {
+          if (mydata.sw_q_lamp) {
+            mydata.sw_q_lamp = false;
+          } else {
+            mydata.sw_q_lamp = true;
+          }
+        } else if (selectedQuartzControlItem == 1) {
+          mydata.quartz_Period = constrain(mydata.quartz_Period + 1, 0, 24);
+        } else if (selectedQuartzControlItem == 2) {
+          mydata.quartz_Duration = constrain(mydata.quartz_Duration + 1, 0, 60);
+        }
+        displayQuartzControlScreen();
+      } else if (enc.click()) {
+        selectedQuartzControlItem++;
+        if (selectedQuartzControlItem > 2) {
+          selectedQuartzControlItem = 0;
+        }
+        displayQuartzControlScreen();
       } else if (enc.hold()) {
         data.update();
         currentScreen = CONFIGURATION;
@@ -286,10 +365,10 @@ void displayMenu() {
 
     case HUMIDITY_OFFSET:
       if (enc.left()) {
-        mydata.humidityOffset--;
+        mydata.humidityOffset = constrain(mydata.humidityOffset - 1, 0, 30);
         displayHumOffsetScreen();
       } else if (enc.right()) {
-        mydata.humidityOffset++;
+        mydata.humidityOffset = constrain(mydata.humidityOffset + 1, 0, 30);
         displayHumOffsetScreen();
       } else if (enc.click() || enc.hold()) {
         currentScreen = SETUP;
@@ -327,15 +406,21 @@ void displayMenu() {
         } else if (selectedSubMenuItem == 0) {  // If "Temperature Control" is selected
           currentScreen = TEMP_CONTROL;
           displayTempControlScreen();
-        } else if (selectedSubMenuItem == 1) {  // If "Temperature Control" is selected
+        } else if (selectedSubMenuItem == 1) {  // If "Humidity Control" is selected
           currentScreen = HUM_CONTROL;
           displayHumControlScreen();
-        } else if (selectedSubMenuItem == 2) {  // If "Temperature Control" is selected
+        } else if (selectedSubMenuItem == 2) {  // If "Draining Control" is selected
           currentScreen = DRAIN_CONTROL;
           displayDrainingControlScreen();
-        }else if (selectedSubMenuItem == 3) {  // If "Temperature Control" is selected
+        }else if (selectedSubMenuItem == 3) {  // If "Air Circulation Control" is selected
           currentScreen = A_CIRCUL_CONTROL;
           displayACirculControlScreen();
+        }else if (selectedSubMenuItem == 4) {  // If "Ventilation Control" is selected
+          currentScreen = VENTA_CONTROL;
+          displayVentaControlScreen();
+        }else if (selectedSubMenuItem == 5) {  // If "Quartz Lamp Control" is selected
+          currentScreen = QUARTZ_CONTROL;
+          displayQuartzControlScreen();
         }
         // Add specific actions for each configuration item if needed
       } else if (enc.hold()) {

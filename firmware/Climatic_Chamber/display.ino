@@ -14,8 +14,6 @@ void displayInit() {
   displayMainScreen();
   lastInteractionTime = millis();  // Initialize last interaction time
 }
-
-
 void displayMainScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setTextColor(ST77XX_WHITE);
@@ -38,7 +36,6 @@ void displayMainScreen() {
   //tft.println("Humidity: " + String(humidity) + " %");
   //tft.fillScreen(ST77XX_BLACK);
 }
-
 void clockDisplay() {
   tft.fillRect(200, 10, 270, 15, ST77XX_BLACK);
   tft.setTextColor(ST77XX_WHITE);
@@ -46,7 +43,6 @@ void clockDisplay() {
   tft.setCursor(220, 10);
   tft.println(ntp.timeString());
 }
-
 void sensorsDisplay() {
   tft.setTextColor(ST77XX_WHITE);
   tft.setTextSize(3);
@@ -84,8 +80,6 @@ void displayMenuScreen() {
     tft.print(menuItems[i]);
   }
 }
-
-
 void displaySetupScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -105,7 +99,6 @@ void displaySetupScreen() {
     tft.print(setupItems[i]);
   }
 }
-
 void displayConfigurationScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -125,9 +118,6 @@ void displayConfigurationScreen() {
     tft.print(configItems[i]);
   }
 }
-
-
-
 void displayTempOffsetScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -139,9 +129,8 @@ void displayTempOffsetScreen() {
   tft.setCursor(10, 50);
   tft.setTextSize(3);
   tft.print("Value: ");
-  tft.print(mydata.tempOffset / 10.0, 1);  // Display as floating point with one decimal
+  tft.print(mydata.tempOffset, 1);  // Display as floating point with one decimal
 }
-
 void displayHumOffsetScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -155,7 +144,6 @@ void displayHumOffsetScreen() {
   tft.print("Value: ");
   tft.print(mydata.humidityOffset, 1);  // Display as floating point with one decimal
 }
-
 void displayTempControlScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -185,7 +173,6 @@ void displayTempControlScreen() {
     }
   }
 }
-
 void displayHumControlScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -213,7 +200,6 @@ void displayHumControlScreen() {
     }
   }
 }
-
 void displayDrainingControlScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -241,7 +227,60 @@ void displayDrainingControlScreen() {
     }
   }
 }
+void displayVentaControlScreen() {
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(10, 10);
+  tft.setTextColor(ST77XX_YELLOW);
+  tft.setTextSize(2);
+  tft.print("** Ventilation Control **");
 
+  tft.setTextColor(ST77XX_WHITE);
+  const char* ventaControlItems[] = { "Enable", "Period Hrs", "Duration Min" };
+  for (int i = 0; i < 3; i++) {
+    tft.setCursor(10, 40 + (i * 30));
+    if (i == selectedVentaControlItem) {
+      tft.setTextColor(ST77XX_RED);
+    } else {
+      tft.setTextColor(ST77XX_WHITE);
+    }
+    tft.print(ventaControlItems[i]);
+    tft.print(": ");
+    if (i == 0) {
+      tft.print(mydata.sw_ventilation ? "ON" : "OFF");
+    } else if (i == 1) {
+      tft.print(mydata.venta_Period);
+    } else if (i == 2) {
+      tft.print(mydata.venta_Duration);
+    }
+  }
+}
+void displayQuartzControlScreen() {
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(10, 10);
+  tft.setTextColor(ST77XX_YELLOW);
+  tft.setTextSize(2);
+  tft.print("**Quartz Lamp Control**");
+
+  tft.setTextColor(ST77XX_WHITE);
+  const char* quartzControlItems[] = { "Enable", "Period Hrs", "Duration Min" };
+  for (int i = 0; i < 3; i++) {
+    tft.setCursor(10, 40 + (i * 30));
+    if (i == selectedQuartzControlItem) {
+      tft.setTextColor(ST77XX_RED);
+    } else {
+      tft.setTextColor(ST77XX_WHITE);
+    }
+    tft.print(quartzControlItems[i]);
+    tft.print(": ");
+    if (i == 0) {
+      tft.print(mydata.sw_q_lamp ? "ON" : "OFF");
+    } else if (i == 1) {
+      tft.print(mydata.quartz_Period);
+    } else if (i == 2) {
+      tft.print(mydata.quartz_Duration);
+    }
+  }
+}
 void displayACirculControlScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);
@@ -271,8 +310,6 @@ void displayACirculControlScreen() {
     }
   }
 }
-
-
 void displayInfoScreen() {
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(10, 10);

@@ -25,11 +25,11 @@ void action() {
       ui.copyInt("air_circ_Period", mydata.air_circ_Period);
       ui.copyInt("air_circ_Duration", mydata.air_circ_Duration);
       ui.copyInt("air_circ_fan_pwr", mydata.air_circ_fan_pwr);
-      ui.copyInt("venta_Hours", mydata.venta_Hours);
-      ui.copyInt("venta_work_time", mydata.venta_work_time);
-      ui.copyInt("quartz_Hours", mydata.quartz_Hours);
-      ui.copyInt("quartz_work_time", mydata.quartz_work_time);
-      ui.copyFloat("tempOffset", mydata.tempOffset);
+      ui.copyInt("venta_Period", mydata.venta_Period);
+      ui.copyInt("venta_Duration", mydata.venta_Duration);
+      ui.copyInt("quartz_Period", mydata.quartz_Period);
+      ui.copyInt("quartz_Duration", mydata.quartz_Duration);
+      ui.copyInt("tempOffset", mydata.tempOffset);
       ui.copyInt("humidityOffset", mydata.humidityOffset);
       
     }
@@ -97,7 +97,6 @@ void action() {
     if (ui.clickBool("sw_mqtt", mydata.sw_mqtt)) {
       data.update();
     }
-
     if (ui.clickInt("maxTempr", mydata.maxTempr)) {
       data.update();
     }
@@ -110,7 +109,6 @@ void action() {
       if (ui.clickInt("humidityOffset", mydata.humidityOffset)) {
       data.update();
     }
-
 
     if (ui.click("btn")) {
       mydata.rele_1_isOn = !mydata.rele_1_isOn;
