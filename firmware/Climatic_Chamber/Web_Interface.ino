@@ -34,8 +34,8 @@ void build() {
         GP_MAKE_BLOCK_THIN_TAB(
           "Humidity Control %",
           if (mydata.sw_humidity) {
-            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("set_humidity", mydata.set_humidity, 40, 90, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:  "); GP.SPINNER("humidity_hys", mydata.humidity_hys, 0, 10, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Humidity %:"); GP.SPINNER("set_humidity", mydata.set_humidity, 30, 90, 5, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:  "); GP.SPINNER("humidity_hys", mydata.humidity_hys, 0, 30, 1, 0, GP_GREEN, "60pix"));
           } GP.PLAIN("Enable:");
           GP.SWITCH("sw_humidity", mydata.sw_humidity);););
 
@@ -43,8 +43,8 @@ void build() {
         GP_MAKE_BLOCK_THIN_TAB(
           "Draining %",
           if (mydata.sw_draining) {
-            GP_MAKE_BOX(GP.PLAIN("Draining %:"); GP.SPINNER("set_draining", mydata.set_draining, 40, 90, 1, 0, GP_GREEN, "60pix"));
-            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:"); GP.SPINNER("draining_hys", mydata.draining_hys, 0, 10, 1, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Draining %:"); GP.SPINNER("set_draining", mydata.set_draining, 30, 90, 5, 0, GP_GREEN, "60pix"));
+            GP_MAKE_BOX(GP.PLAIN("Hysteresis %:"); GP.SPINNER("draining_hys", mydata.draining_hys, 0, 30, 1, 0, GP_GREEN, "60pix"));
           } GP.PLAIN("Enable:");
           GP.SWITCH("sw_draining", mydata.sw_draining););
 

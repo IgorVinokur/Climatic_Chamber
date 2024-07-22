@@ -6,6 +6,7 @@ void displayMenu() {
   // Check for timeout
   if (currentScreen != MAIN && (millis() - lastInteractionTime >= timeoutDuration)) {
     currentScreen = MAIN;
+    data.update();
     displayMainScreen();
   }
   switch (currentScreen) {
@@ -118,7 +119,7 @@ void displayMenu() {
             
           }
         } else if (selectedTempControlItem == 1) {
-          mydata.temp = constrain(mydata.temp - 1, 0, 35);
+          mydata.temp = constrain(mydata.temp - 1, 0, 30);
         } else if (selectedTempControlItem == 2) {
           mydata.temp_hys = constrain(mydata.temp_hys - 1, 0, 10);
         } else if (selectedTempControlItem == 3) {
@@ -137,7 +138,7 @@ void displayMenu() {
             mydata.sw_temp = true;
           }
         } else if (selectedTempControlItem == 1) {
-          mydata.temp = constrain(mydata.temp + 1, 0, 35);
+          mydata.temp = constrain(mydata.temp + 1, 0, 30);
         } else if (selectedTempControlItem == 2) {
           mydata.temp_hys = constrain(mydata.temp_hys + 1, 0, 10);
         } else if (selectedTempControlItem == 3) {
@@ -170,7 +171,7 @@ void displayMenu() {
             mydata.sw_humidity = true;
           }
         } else if (selectedHumControlItem == 1) {
-          mydata.set_humidity = constrain(mydata.set_humidity - 5, 0, 100);
+          mydata.set_humidity = constrain(mydata.set_humidity - 5, 30, 90);
         } else if (selectedHumControlItem == 2) {
           mydata.humidity_hys = constrain(mydata.humidity_hys - 5, 0, 30);
         }
@@ -209,7 +210,7 @@ void displayMenu() {
             mydata.sw_draining = true;
           }
         } else if (selectedDrainControlItem == 1) {
-          mydata.set_draining = constrain(mydata.set_draining - 5, 0, 100);
+          mydata.set_draining = constrain(mydata.set_draining - 5, 30, 90);
         } else if (selectedDrainControlItem == 2) {
           mydata.draining_hys = constrain(mydata.draining_hys - 5, 0, 30);
         }
@@ -222,7 +223,7 @@ void displayMenu() {
             mydata.sw_draining = true;
           }
         } else if (selectedDrainControlItem == 1) {
-          mydata.set_draining = constrain(mydata.set_draining + 5, 0, 100);
+          mydata.set_draining = constrain(mydata.set_draining + 5, 30, 90);
         } else if (selectedDrainControlItem == 2) {
           mydata.draining_hys = constrain(mydata.draining_hys + 5, 0, 30);
         }

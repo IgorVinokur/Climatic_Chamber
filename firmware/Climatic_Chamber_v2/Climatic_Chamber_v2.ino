@@ -1,10 +1,10 @@
 #include "config.h"
 #include "db.h"
+#include "startup.h"
 
 
 void setup() {
-    Serial.begin(115200);
-    Serial.println();
+    startup();
 
     db_init();
 
