@@ -1,3 +1,5 @@
+#pragma once
+
 #define STATIC_IP                           // закомментировать если подключаетесь к мобильной точке доступа на телефоне
 #define AP_DEFAULT_SSID "Climatic Chamber"  // Стандартное имя точки доступа ESP (До 20-ти символов)
 #define AP_DEFAULT_PASS "00000000"          // Стандартный пароль точки доступа ESP (До 20-ти символов)
@@ -27,5 +29,5 @@
 #define DISPLAY_HEIGHT 320  //Display Size
 
 
-#include <GyverHub.h>
-GyverHub hub("Climatic Chember", "ESP32S3", "");
+
+

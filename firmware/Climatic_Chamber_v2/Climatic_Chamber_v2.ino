@@ -1,19 +1,33 @@
+#include <Arduino.h>
+
 #include "config.h"
 #include "db.h"
-#include "startup.h"
+#include "hub.h"
+#include "wifi.h"
+
 
 
 void setup() {
-    startup();
+  Serial.begin(115200);
 
-    db_init();
-
+   db_init();
+   wifi_Init(); 
+ 
+  hub.onBuild(build);
+  hub.begin();
+  hub.setBufferSize(2000);
 }
 
 
 void loop() {
+
+  hub.tick();
     
 
 
 }
+
+
+
+
 
