@@ -5,6 +5,7 @@
 #define AP_DEFAULT_PASS "00000000"          // Стандартный пароль точки доступа ESP (До 20-ти символов)
 #define STA_DEFAULT_SSID ""                 // Стандартное имя точки доступа роутера (До 20-ти символов)
 #define STA_DEFAULT_PASS ""                 // Стандартный пароль точки доступа роутера (До 20-ти символов)
+#define CONNECT_TIMEOUT 10000               //WiFI Connection Timeout
 #define RELE1 4
 #define RELE_TEMP 5
 #define RELE_THUM 6
@@ -27,6 +28,18 @@
 
 #define DISPLAY_WIDTH 170   // Display Size
 #define DISPLAY_HEIGHT 320  //Display Size
+
+String formattedDate;
+
+#include <GyverNTP.h>
+GyverNTP ntp(2);
+
+
+
+
+
+
+
 
 
 
