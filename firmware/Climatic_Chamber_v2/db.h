@@ -1,78 +1,81 @@
 #pragma once
-#include <GyverDBFile.h>
-#include <LittleFS.h>
-GyverDBFile db(&LittleFS, "data.db");
 
-enum dbid : size_t {
-    apSsid,
-    apPass,
-    staSsid,
-    staPass,
-    gmt,
-    set_temp,
-    temp_hys,
-    set_humidity,
-    humidity_hys,
-    set_drainage,
-    drainage_hys,
-    sw_temp,
-    sw_humidity,
-    sw_drainage,
-    sw_a_circulation,
-    sw_ventilation,
-    sw_q_lamp,
-    sw_tempmode,
-    sw_mqtt,
-    mqttServer,
-    mqttUser,
-    mqttPwd,
-    mqttTopic,
-    mqttPort,
-    air_circ_fan_pwr,
-    air_circ_Period,
-    air_circ_Duration,
-    venta_Period,
-    venta_Duration,
-    quartz_Period,
-    quartz_Duration,
-    tempOffset,
-    humidityOffset,
+#include <LittleFS.h>
+#include <FileData.h>  // Замена епрома
+
+struct Data {
+  char apSsid[21] = AP_DEFAULT_SSID;    // Имя сети для AP режима по умолчанию
+  char apPass[21] = AP_DEFAULT_PASS;    // Пароль сети для AP режима по умолчанию
+  char staSsid[21] = STA_DEFAULT_SSID;  // Имя сети для STA режима по умолчанию
+  char staPass[21] = STA_DEFAULT_PASS;  // Пароль сети для STA режима по умолчанию
+  int gmt = 2;
+  char ntp_srv[32] = "pool.ntp.org";  
+  int temp = 10.0;
+  int temp_hys = 0.0;
+  int16_t set_humidity = 70;
+  int humidity_hys = 0;
+  int16_t set_draining = 80;
+  int draining_hys = 0;
+  bool sw_temp;
+  bool sw_humidity;
+  bool sw_draining;
+  bool sw_a_circulation;
+  bool sw_ventilation;
+  bool sw_q_lamp;
+  bool sw_tempmode = false;  //Temperature Relay Mode : 0=NORMAL for Cooling, and 1=REVERSE for Heatting
+  bool sw_mqtt = false;
+  char mqttServer[51] = "";
+  char mqttUser[21] = "";
+  char mqttPwd[21] = "";
+  char mqttTopic[51] = "";
+  int mqttPort = 1883;
+  int16_t air_circ_fan_pwr = 100;
+  int16_t air_circ_Period = 2;
+  int16_t air_circ_Duration = 2;
+  int16_t venta_Period = 2;
+  int16_t venta_Duration = 2;
+  int16_t quartz_Period = 2;
+  int16_t quartz_Duration = 2;
+  int16_t tempOffset = 0;
+  int16_t humidityOffset = 0;
+
 };
 
-void db_init() {
-    LittleFS.begin();
-    db.begin();
-    db.init(dbid::apSsid, AP_DEFAULT_SSID);
-    db.init(dbid::apPass, AP_DEFAULT_PASS);
-    db.init(dbid::staSsid, STA_DEFAULT_SSID);
-    db.init(dbid::staPass, STA_DEFAULT_PASS);
-    db.init(dbid::gmt, 2);
-    db.init(dbid::set_temp, 10);
-    db.init(dbid::temp_hys, 0);
-    db.init(dbid::set_humidity, 70);
-    db.init(dbid::humidity_hys, 0);
-    db.init(dbid::set_drainage, 80);
-    db.init(dbid::drainage_hys, "");
-    db.init(dbid::sw_humidity, "");
-    db.init(dbid::sw_drainage, "");
-    db.init(dbid::sw_a_circulation, "");
-    db.init(dbid::sw_ventilation, "");
-    db.init(dbid::sw_q_lamp, "");
-    db.init(dbid::sw_tempmode, false);
-    db.init(dbid::sw_mqtt, false);
-    db.init(dbid::mqttServer, "");
-    db.init(dbid::mqttUser, "");
-    db.init(dbid::mqttPwd, "");
-    db.init(dbid::mqttTopic, "");
-    db.init(dbid::mqttPort, 1883);
-    db.init(dbid::air_circ_fan_pwr, 100);
-    db.init(dbid::air_circ_Period, 2);
-    db.init(dbid::air_circ_Duration, 2);
-    db.init(dbid::venta_Period, 2);
-    db.init(dbid::venta_Duration, 2);
-    db.init(dbid::quartz_Period, 2);
-    db.init(dbid::quartz_Duration, 2);
-    db.init(dbid::tempOffset, 0);
-    db.init(dbid::humidityOffset, 0);
-}
+Data mydata;
+FileData data(&LittleFS, "/data.dat", 'B', &mydata, sizeof(mydata));
 
+
+void db_init() {
+
+ while (!LittleFS.begin()) {  // Инициализация файловой системы
+    LittleFS.format();
+  }
+  if (!LittleFS.begin()) Serial.println("FS Error");
+  // прочитать данные из файла в переменную
+  // при первом запуске в файл запишутся данные из структуры
+  FDstat_t stat = data.read();
+
+  switch (stat) {
+    case FD_FS_ERR:
+      Serial.println("FS Error");
+      break;
+    case FD_FILE_ERR:
+      Serial.println("Error");
+      break;
+    case FD_WRITE:
+      Serial.println("Data Write");
+      break;
+    case FD_ADD:
+      Serial.println("Data Add");
+      break;
+    case FD_READ:
+      Serial.println("Data Read");
+      break;
+    default:
+      break;
+  }
+
+  Serial.println("Data read:");
+
+
+}
