@@ -17,6 +17,7 @@ void build_dashboard(gh::Builder& b) {
   {
     gh::Row r(b);
      b.Label_("lab", formattedDate).noTab(1).label("Time").size(2);
+     
     // b.Label((ntp.dateString()).size(2).noTab(1).color(0x25b18f));
     //b.DateTime_("datet", &stamp).noTab(1).noLabel(1).size(3).color(0x25b18f);
   }
