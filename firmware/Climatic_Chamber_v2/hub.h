@@ -6,9 +6,7 @@
 //#define GH_NO_HTTP_FETCH          // отключить скачивание файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD         // отключить загрузку файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD_PORTAL  // отключить упрощённую загрузку файлов с ip/hub/upload_portal (для esp)
-
 #include <GyverHub.h>
-
 GyverHub hub("MyDevices", "Climatic Chember", "f017");
 
 void build_dashboard(gh::Builder& b) {
@@ -16,15 +14,16 @@ void build_dashboard(gh::Builder& b) {
   b.Title("Dashboard");
   {
     gh::Row r(b);
-     b.Label_("lab", formattedDate).noTab(1).label("Time").size(2);
+     b.Label_("timedash", formattedDate).noTab(1).label("Time").size(2);
+     //if (b.Button().label("value").size(1).click()) hub.update("timedash");
      
     // b.Label((ntp.dateString()).size(2).noTab(1).color(0x25b18f));
     //b.DateTime_("datet", &stamp).noTab(1).noLabel(1).size(3).color(0x25b18f);
   }
   {
     gh::Row r(b);
-    b.Gauge_("Temperature").label("Temperature").noTab(1).size(2).value(34).range(10, 90, 5).unit("℃").color(0x25b18f);
-    b.Gauge_("Humidity").label("Humidity").noTab(1).size(2).value(85).range(10, 90, 5).unit("%").color(0x25b18f);
+    b.Gauge_("Temperature").label("Temperature").noTab(1).size(2).value(temperature).range(10, 90, 5).unit("℃").color(0x25b18f);
+    b.Gauge_("Humidity").label("Humidity").noTab(1).size(2).value(humidity).range(10, 90, 5).unit("%").color(0x25b18f);
     // if (b.Button().label("value").size(1).click()) hub.update("gag").value(random(100));
     // if (b.Button().label("range").click()) hub.update("gag").range(10, 90, 5);
     // if (b.Button().label("unit").click()) hub.update("gag").unit("deg");
