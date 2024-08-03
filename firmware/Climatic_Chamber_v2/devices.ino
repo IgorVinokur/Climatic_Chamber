@@ -34,9 +34,6 @@ void encInit() {
   enc.counter = 0;
 }
 void relayInit() {
-
-
-
   temp_relay_heating.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
   temp_relay_heating.hysteresis = mydata.temp_hys;  // ширина гистерезиса
   temp_relay_heating.k = 0.5;                       // коэффициент обратной связи (подбирается по факту)
@@ -61,4 +58,27 @@ void bme280Read() {
   }
     //tft.println("Temp:" + String(temperature) + "*C " + "Hum:" + String(humidity) + " %" );
 } //bme280Read()
+
+void temprelay() { //Control Teperature
+  if (mydata.sw_temp) {
+    if (mydata.sw_tempmode) {  // If TempMode 1= Heating
+      static uint32_t tempRelayTimer = 0;
+      if (millis() - tempRelayTimer > 2000) {  // Set mills timer to 2 seconds
+        tempRelayTimer = millis();
+        temp_relay_heating.input = temperature;
+        // getResult возвращает значение для управляющего устройства
+        digitalWrite(RELE_TEMP, temp_relay_heating.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
+      }
+    } else {
+      static uint32_t tempRelayTimer = 0;
+      if (millis() - tempRelayTimer > 2000) {  // свой таймер на миллис, 2 секунды
+        tempRelayTimer = millis();
+        temp_relay_cooling.input = temperature;
+        // getResult возвращает значение для управляющего устройства
+        digitalWrite(RELE_TEMP, temp_relay_cooling.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
+      }
+    }
+  }
+}
+
 

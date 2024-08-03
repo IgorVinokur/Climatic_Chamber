@@ -26,9 +26,10 @@ void loop() {
   data.tick();
   hub.tick();
   ntp.tick();
+  enc.tick();
+  temprelay();
   //hub.sendUpdate("timedash");
-  hub.sendUpdate("Temperature");
-  hub.sendUpdate("Humidity");
+  
 //if (ntp.ms() == 500) {
  
  
@@ -41,6 +42,7 @@ displayMenu();
     ms1 = millis();
    
     bme280Read();
+    
   //  String timeString = ntp.timeString();
   //  timeString.toCharArray(formattedDate, 9);
 
