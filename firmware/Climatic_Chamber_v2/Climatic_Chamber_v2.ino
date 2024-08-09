@@ -15,7 +15,6 @@ void setup() {
   relayInit();
   displayInit();
   ntpInit();
-  
   hub.onBuild(build);
   hub.begin();
   hub.setBufferSize(2000);
@@ -28,6 +27,10 @@ void loop() {
   ntp.tick();
   enc.tick();
   temprelay();
+  humrelay();
+  AirCirculationTimer();
+  VentilationTimer();
+  QLampTimer();
   //hub.sendUpdate("timedash");
   
 //if (ntp.ms() == 500) {

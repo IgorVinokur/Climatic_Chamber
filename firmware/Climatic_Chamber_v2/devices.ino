@@ -34,12 +34,25 @@ void encInit() {
   enc.counter = 0;
 }
 void relayInit() {
-  temp_relay_heating.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
+
+  pinMode(RELE_TEMP, OUTPUT);  // Set the Temperature relay pin as output
+  pinMode(RELE_HUM, OUTPUT);  // Set the Humidity relay pin as output
+  pinMode(RELE_DRAIN, OUTPUT);  // Set the Draining relay pin as output
+  pinMode(RELE_A_CIRC, OUTPUT);  // Set the Air Circulation relay pin as output
+  pinMode(RELE_VENTA, OUTPUT);  // Set the Ventilation relay pin as output
+  pinMode(RELE_Q_LAMP, OUTPUT);  // Set the Qurz Lamp relay pin as output
+
+  temp_relay_heating.setpoint = mydata.temp;        // установка (ставим на xx градусов)
   temp_relay_heating.hysteresis = mydata.temp_hys;  // ширина гистерезиса
   temp_relay_heating.k = 0.5;                       // коэффициент обратной связи (подбирается по факту)
-  temp_relay_cooling.setpoint = mydata.temp;        // установка (ставим на 40 градусов)
+  
+  temp_relay_cooling.setpoint = mydata.temp;        // установка (ставим на xx градусов)
   temp_relay_cooling.hysteresis = mydata.temp_hys;  // ширина гистерезиса
   temp_relay_cooling.k = 0.5;                       // коэффициент обратной связи (подбирается по факту)
+  
+  hum_relay.setpoint = mydata.set_humidity;         // Set Humidity %
+  hum_relay.hysteresis = mydata.humidity_hys;       // Set humidity Hysteresis %
+  hum_relay.k = 0.5; 
 }
 
 void bme280Read() { 
@@ -80,5 +93,19 @@ void temprelay() { //Control Teperature
     }
   }
 }
+
+void humrelay() { //Control Teperature
+  if (mydata.sw_humidity) {
+      static uint32_t humRelayTimer = 0;
+      if (millis() - humRelayTimer > 2000) {  // Set mills timer to 2 seconds
+        humRelayTimer = millis();
+        hum_relay.input = humidity;
+        // getResult возвращает значение для управляющего устройства
+        digitalWrite(RELE_HUM, hum_relay.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
+      }
+    
+  }
+}
+
 
 
