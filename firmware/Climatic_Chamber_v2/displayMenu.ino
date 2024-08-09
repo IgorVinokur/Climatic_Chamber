@@ -157,6 +157,10 @@ void displayMenu() {
         displayTempControlScreen();
       } else if (enc.hold()) {
         data.update();
+        temp_relay_heating.setpoint = mydata.temp;        // Update Temperature of cooling
+        temp_relay_heating.hysteresis = mydata.temp_hys;  //Update Hysteresis of cooling
+        temp_relay_cooling.setpoint = mydata.temp;        // Update Temperature of heating
+        temp_relay_cooling.hysteresis = mydata.temp_hys;  // Update Hysteresis of heating
         currentScreen = CONFIGURATION;
         displayConfigurationScreen();
       }
@@ -197,6 +201,8 @@ void displayMenu() {
         displayHumControlScreen();
       } else if (enc.hold()) {
         data.update();
+        hum_relay.setpoint = mydata.set_humidity;         // Set Humidity %
+        hum_relay.hysteresis = mydata.humidity_hys;       // Set humidity Hysteresis %
         currentScreen = CONFIGURATION;
         displayConfigurationScreen();
       }

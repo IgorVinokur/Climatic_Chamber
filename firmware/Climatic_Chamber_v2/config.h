@@ -11,14 +11,15 @@
 #define I2C_SDA 48
 #define I2C_SCL 47
 #define SEALEVELPRESSURE_HPA (1013.25)
-#define RELE_TEMP 5
-#define RELE_THUM 6
-#define RELE_DRAIN 7
-#define RELE_C_VENTA 15
-#define RELE_Q_LAMP 16
-#define ENCODER_PIN_A 40
-#define ENCODER_PIN_B 41
-#define ENCODER_PIN_SW 42
+#define RELE_TEMP 5 //Temperature Relay
+#define RELE_HUM 6  //Humidity Relay
+#define RELE_DRAIN 7 // Drain Relay
+#define RELE_A_CIRC 15 // Air Circulation Relay
+#define RELE_VENTA 16 // Venta Relay
+#define RELE_Q_LAMP 17 // Q Lamp Relay
+#define ENCODER_PIN_A 40  //Encoder A
+#define ENCODER_PIN_B 41  // Encoder B
+#define ENCODER_PIN_SW 42 //Encoder SW
 #define TFT_CS 10  //Display SPI
 #define TFT_DC 9   //Display SPI
 #define TFT_RST 8  //Display SPI
@@ -35,11 +36,20 @@ TwoWire I2CBME = TwoWire(0);
 Adafruit_BME280 bme;
 
 #include <GyverRelay.h>
-GyverRelay temp_relay_cooling(NORMAL);
-GyverRelay temp_relay_heating(REVERSE);
+GyverRelay temp_relay_cooling(NORMAL); //Cooling Relay
+GyverRelay temp_relay_heating(REVERSE); //Heating Relay
+GyverRelay hum_relay(NORMAL); // Humidity Relay
 
 #include <EncButton.h>
 EncButton enc(ENCODER_PIN_A, ENCODER_PIN_B, ENCODER_PIN_SW);
+
+#include <GyverTimer.h>
+GTimer A_Circ_periodTimer;
+GTimer A_Circ_durationTimer;
+GTimer Venta_periodTimer;
+GTimer Venta_durationTimer;
+GTimer QLamp_periodTimer;
+GTimer QLamp_durationTimer;
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_GFX.h>
@@ -52,7 +62,10 @@ int16_t rowhumidity;     //humidity from sensor
 int16_t temperature;     //calibrated temperature
 int16_t humidity;        //calibrated humidity
 
-
+// Function to convert hours, minutes, and seconds to milliseconds
+unsigned long timeToMillis(int hours, int minutes, int seconds) {
+  return (unsigned long)hours * 3600000UL + (unsigned long)minutes * 60000UL + (unsigned long)seconds * 1000UL;
+}
 
 //*****Display Variables ******************
 enum Screen { MAIN,
