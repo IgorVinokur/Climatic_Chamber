@@ -15,6 +15,7 @@ void setup() {
   relayInit();
   displayInit();
   ntpInit();
+  hub.config(F("MyDevices"), F("Climatic Chember"), F(""));
   hub.onBuild(build);
   hub.begin();
   hub.setBufferSize(2000);
@@ -31,6 +32,7 @@ void loop() {
   AirCirculationTimer();
   VentilationTimer();
   QLampTimer();
+  updateTick();
   //hub.sendUpdate("timedash");
   
 //if (ntp.ms() == 500) {

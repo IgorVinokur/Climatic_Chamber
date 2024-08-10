@@ -1,38 +1,60 @@
 #pragma once
 
 #define GH_INCLUDE_PORTAL
-#define GH_NO_FS
+//#define GH_NO_FS
 //#define GH_NO_HTTP_PUBLIC         // отключить доступ к файлам по http c ip/www (для esp)
 //#define GH_NO_HTTP_FETCH          // отключить скачивание файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD         // отключить загрузку файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD_PORTAL  // отключить упрощённую загрузку файлов с ip/hub/upload_portal (для esp)
 #include <GyverHub.h>
-GyverHub hub("MyDevices", "Climatic Chember", "f017");
+GyverHub hub; //("MyDevices", "Climatic Chember", "f017");
 //*******************************************************DashBoard*****************************************************************
+bool rndBool() {
+    static bool v;
+    return v = !v;
+}
+const char* rndIcon() {
+    static uint8_t i;
+    if (++i >= 4) i = 0;
+    const char* icons[] = {
+        "",
+        "f0ad",
+        "f5ce",
+        "",
+    };
+    return icons[i];
+}
 void build_dashboard(gh::Builder& b) {
-  //    //build_common(b);
-  b.Title("Dashboard");
-  {
-    gh::Row r(b);
-     b.Label_("timedash", formattedDate).noTab(1).label(F("Time")).size(2);
-     //if (b.Button().label("value").size(1).click()) hub.update("timedash");
-     
-    // b.Label((ntp.dateString()).size(2).noTab(1).color(0x25b18f));
-    //b.DateTime_("datet", &stamp).noTab(1).noLabel(1).size(3).color(0x25b18f);
-  }
+    b.Title("Dashboard");
   {
     gh::Row r(b);
     b.Gauge_("temp").label(F("Temperature")).noTab(1).size(2).value(String(temperature)).range(10, 90, 5).unit("℃").color(0x25b18f);
-    b.Gauge_("hum").label(F("Humidity")).noTab(1).size(2).value(String(humidity)).range(10, 90, 5).unit("%").color(0x25b18f);
-    // if (b.Button().label("value").size(1).click()) hub.update("gag").value(random(100));
-    // if (b.Button().label("range").click()) hub.update("gag").range(10, 90, 5);
-    // if (b.Button().label("unit").click()) hub.update("gag").unit("deg");
-    //if (b.Button().label("color").click()) hub.update("gag").color(rndColor());
-    static gh::Timer tmr(2000);
-         if (tmr) {
-          b.refresh();
-         }
+    b.Gauge_("hum").label(F("Humidity")).noTab(1).size(2).value(String(humidity)).range(10, 90, 5).unit("%").color(0x25b18f);  
   }
+  
+  
+  {
+    gh::Row r(b);
+    b.Icon_("tempsts").label("Temp.").noTab(0).icon(F("f614"));
+     if (mydata.sw_temp)
+       hub.update("tempsts").disabled(0);
+     else 
+      hub.update("tempsts").disabled(1);
+    
+    if (digitalRead(RELE_TEMP)==HIGH)
+      hub.update("tempsts").value(1);
+     else 
+      hub.update("tempsts").value(0);
+    
+
+  }
+  
+  
+ 
+//static gh::Timer tmr(2000);
+//    if (tmr) {
+//          b.refresh();
+//    }
 }
 //++++++++++++++++++++++++++++++++++++++Settings***********************************************************************************
 void build_settings(gh::Builder& b) {
@@ -99,7 +121,7 @@ void build_settings(gh::Builder& b) {
 {
   gh::Row r(b);
   static gh::Button btn;
-  b.Button_("btn").label(F("Save & Reboot")).noTab(0).attach(&flag_rst).fontSize(30);
+  b.Button_("btn").label(F("Save & Reboot")).noTab(0).attach(&flag_rst).fontSize(30).icon("");
 }
 
 if (flag_rst) {
@@ -234,20 +256,7 @@ void build_config(gh::Builder& b) {
 
 
 
-void updateTick() {
-    if (hub.menu == 0) {
-        static gh::Timer tmr(2000);
-        if (tmr) {
-            gh::Update upd(&hub);
-            upd.update("temp").value(String(temperature));
-            upd.update("hum").value(String(humidity));
-            upd.send();
-            
 
-            //hub.sendUpdate("lbl3");
-        }
-    }
-}
 
 
 void build(gh::Builder& b) {
@@ -269,4 +278,16 @@ void build(gh::Builder& b) {
       break;
     
   }
+}
+void updateTick() {
+    
+        static gh::Timer tmr(5000);
+        if (tmr) {
+            gh::Update upd(&hub);
+            upd.update("temp").value(String(temperature));
+            upd.update("hum").value(String(humidity));
+            upd.send();
+            //hub.sendUpdate("lbl3");
+        }
+    
 }
