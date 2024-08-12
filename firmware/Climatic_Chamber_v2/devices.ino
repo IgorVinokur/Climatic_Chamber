@@ -60,12 +60,12 @@ void bme280Read() {
   rowhumidity = (int) bme.readHumidity();
   temperature = rowtemperature + mydata.tempOffset;
   humidity = rowhumidity + mydata.humidityOffset;
-#ifdef Debug
-  Serial.print("Temperature = ");
-  Serial.println(temperature);
-  Serial.print("Humidity = ");
-  Serial.println(humidity);
-  #endif
+//#ifdef Debug
+//  Serial.print("Temperature = ");
+//  Serial.println(temperature);
+//  Serial.print("Humidity = ");
+//  Serial.println(humidity);
+//  #endif
   if (currentScreen == MAIN){
      sensorsDisplay();
   }
@@ -83,10 +83,6 @@ void temprelay() { //Control Teperature
         digitalWrite(RELE_TEMP, temp_relay_heating.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
       }
     } else {
-
-
-
-
       static uint32_t tempRelayTimer = 0;
       if (millis() - tempRelayTimer > 2000) {  // свой таймер на миллис, 2 секунды
         tempRelayTimer = millis();
@@ -97,7 +93,6 @@ void temprelay() { //Control Teperature
     }
   }
 }
-
 void humrelay() { //Control Teperature
   if (mydata.sw_humidity) {
       static uint32_t humRelayTimer = 0;
@@ -106,8 +101,7 @@ void humrelay() { //Control Teperature
         hum_relay.input = humidity;
         // getResult возвращает значение для управляющего устройства
         digitalWrite(RELE_HUM, hum_relay.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
-      }
-    
+      }    
   }
 }
 

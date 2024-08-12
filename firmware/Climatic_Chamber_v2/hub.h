@@ -1,13 +1,13 @@
 #pragma once
 
 #define GH_INCLUDE_PORTAL
-//#define GH_NO_FS
+#define GH_NO_FS
 //#define GH_NO_HTTP_PUBLIC         // отключить доступ к файлам по http c ip/www (для esp)
 //#define GH_NO_HTTP_FETCH          // отключить скачивание файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD         // отключить загрузку файлов по http (для esp)
 //#define GH_NO_HTTP_UPLOAD_PORTAL  // отключить упрощённую загрузку файлов с ip/hub/upload_portal (для esp)
 #include <GyverHub.h>
-GyverHub hub;  //("MyDevices", "Climatic Chember", "f017");
+GyverHub hub;
 //*******************************************************DashBoard*****************************************************************
 
 void build_dashboard(gh::Builder& b) {
