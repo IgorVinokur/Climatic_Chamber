@@ -33,12 +33,8 @@ void loop() {
   VentilationTimer();
   QLampTimer();
   updateTick();
-  //hub.sendUpdate("timedash");
-  
-//if (ntp.ms() == 500) {
+  dashboardiconStat();
  
- 
-  //}
 displayMenu();
 
   // раз в 1 сек делаем дела
