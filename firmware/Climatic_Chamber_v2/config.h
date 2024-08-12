@@ -38,7 +38,7 @@ Adafruit_BME280 bme;
 #include <GyverRelay.h>
 GyverRelay temp_relay_cooling(NORMAL); //Cooling Relay
 GyverRelay temp_relay_heating(REVERSE); //Heating Relay
-GyverRelay hum_relay(NORMAL); // Humidity Relay
+GyverRelay hum_relay(REVERSE); // Humidity Relay
 
 #include <EncButton.h>
 EncButton enc(ENCODER_PIN_A, ENCODER_PIN_B, ENCODER_PIN_SW);

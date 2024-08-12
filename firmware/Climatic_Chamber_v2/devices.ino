@@ -83,6 +83,10 @@ void temprelay() { //Control Teperature
         digitalWrite(RELE_TEMP, temp_relay_heating.compute(2));  // отправляем на реле. Время передаём вручную, у нас 2 секунды
       }
     } else {
+
+
+
+
       static uint32_t tempRelayTimer = 0;
       if (millis() - tempRelayTimer > 2000) {  // свой таймер на миллис, 2 секунды
         tempRelayTimer = millis();
@@ -106,6 +110,8 @@ void humrelay() { //Control Teperature
     
   }
 }
+
+
 
 
 
