@@ -12,6 +12,12 @@ GyverHub hub;
 
 void build_dashboard(gh::Builder& b) {
   b.Title("Dashboard");
+  //{
+  //  gh::Row r(b);
+  //   b.Label_(ntp.timeString());
+  //   b.Label_(ntp.dateString());
+  //   hub.update(F("main")).label(ntp.timeString()).label(ntp.dateString());
+ // }
   {
     gh::Row r(b);
     b.Gauge_("temp").label(F("Temperature")).noTab(1).size(2).value(String(temperature)).range(10, 90, 5).unit("℃").color(0x25b18f);

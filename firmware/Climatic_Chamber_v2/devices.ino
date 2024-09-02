@@ -93,7 +93,7 @@ void temprelay() { //Control Teperature
     }
   }
 }
-void humrelay() { //Control Teperature
+void humrelay() { //Control Humidity Relay
   if (mydata.sw_humidity) {
       static uint32_t humRelayTimer = 0;
       if (millis() - humRelayTimer > 2000) {  // Set mills timer to 2 seconds
@@ -104,6 +104,8 @@ void humrelay() { //Control Teperature
       }    
   }
 }
+
+
 
 
 
