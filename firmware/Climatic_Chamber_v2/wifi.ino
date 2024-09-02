@@ -23,6 +23,10 @@ void wifi_Init() {
   } else {
     Serial.println(WiFi.localIP());
     //ClientIP = WiFi.localIP().toString().c_str();
+    if (mydata.sw_mqtt){
+    hub.mqtt.config(mydata.mqttServer, mydata.mqttPort, mydata.mqttUser, mydata.mqttPwd);
+    //if (hub.online()) Serial.println(F("MQTT succsessfully connected"));  // MQTT подключен)
+    }
   }
 
 }

@@ -18,7 +18,8 @@ void AirCirculationTimer() {
     }
     // Check if the duration timer has elapsed to turn off the relay
     if (A_Circ_durationTimer.isReady()) {
-      digitalWrite(RELE_A_CIRC, LOW);
+      int s = map(mydata.air_circ_fan_pwr, 30, 100, 0, 255);
+        analogWrite(RELE_A_CIRC, s);
       #ifdef Debug
         Serial.println("Air Circulation Relay is OFF");
       #endif

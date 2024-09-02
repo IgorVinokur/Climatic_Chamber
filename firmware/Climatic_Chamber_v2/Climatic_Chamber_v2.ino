@@ -44,13 +44,6 @@ displayMenu();
    
     bme280Read();
     
-  //  String timeString = ntp.timeString();
-  //  timeString.toCharArray(formattedDate, 9);
-
-    // отдаем текущую дату и время переменным в веб интерфейс
-    //nowTime.set(ntp.hour(), ntp.minute(), ntp.second());
-    //nowDate.set(ntp.year(), ntp.month(), ntp.day());
-    // если разрешено, включаем по времени нагрузку ( свет или насос)
     if (currentScreen == MAIN) {
       if (ntp.synced()) {
         clockDisplay();
